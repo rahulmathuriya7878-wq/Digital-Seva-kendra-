@@ -102,3 +102,38 @@ export const deleteTokenRecord = async (id: string) => {
     throw error;
   }
 };
+
+export const findTokenByNumberOrRef = async (searchStr: string): Promise<TokenBooking | null> => {
+  const clean = searchStr.trim().toUpperCase();
+  if (!clean) return null;
+
+  try {
+    const all = await fetchAllTokens();
+    const found = all.find(
+      t => t.tokenNumber.toUpperCase() === clean || 
+           t.referenceId.toUpperCase() === clean ||
+           t.tokenNumber.toUpperCase().includes(clean) ||
+           t.referenceId.toUpperCase().includes(clean)
+    );
+    if (found) return found;
+  } catch (e) {
+    console.warn('Error querying token:', e);
+  }
+
+  // Check local storage backup
+  try {
+    const stored = localStorage.getItem('dsk_saved_tokens');
+    if (stored) {
+      const list: TokenBooking[] = JSON.parse(stored);
+      const found = list.find(
+        t => t.tokenNumber.toUpperCase() === clean || 
+             t.referenceId.toUpperCase() === clean ||
+             t.tokenNumber.toUpperCase().includes(clean) ||
+             t.referenceId.toUpperCase().includes(clean)
+      );
+      if (found) return found;
+    }
+  } catch (e) {}
+
+  return null;
+};

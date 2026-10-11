@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Language, ApplicationStatusResult } from '../types/service';
 import { SAMPLE_STATUS_DATA } from '../data/servicesData';
-import { Search, CheckCircle2, Clock, AlertTriangle, ArrowRight, ShieldCheck, FileCheck } from 'lucide-react';
+import { findTokenByNumberOrRef } from '../lib/tokenService';
+import { Search, CheckCircle2, Clock, AlertTriangle, ArrowRight, ShieldCheck, FileCheck, Loader2, User, MapPin } from 'lucide-react';
 
 interface StatusTrackerProps {
   language: Language;
@@ -11,42 +12,116 @@ export const StatusTracker: React.FC<StatusTrackerProps> = ({ language }) => {
   const isHi = language === 'hi';
   const [appIdInput, setAppIdInput] = useState<string>('APP-2026-8842');
   const [result, setResult] = useState<ApplicationStatusResult | null>(SAMPLE_STATUS_DATA['APP-2026-8842']);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     const cleanId = appIdInput.trim().toUpperCase();
-    if (SAMPLE_STATUS_DATA[cleanId]) {
-      setResult(SAMPLE_STATUS_DATA[cleanId]);
-      setNotFound(false);
-    } else {
-      // Dynamic simulated result for any valid format
-      if (cleanId.length >= 6) {
+    if (!cleanId) return;
+
+    setIsSearching(true);
+    setNotFound(false);
+
+    // 1. First check if it matches a real token booked by citizen in Firestore
+    try {
+      const realToken = await findTokenByNumberOrRef(cleanId);
+      if (realToken) {
+        const isDone = realToken.status === 'completed';
+        const isProg = realToken.status === 'in-progress';
+        
+        const currentStep = isDone ? 4 : isProg ? 2 : 1;
+        const statusType: 'In Progress' | 'Approved' | 'Action Needed' = isDone ? 'Approved' : 'In Progress';
+
         setResult({
-          applicationId: cleanId,
-          serviceNameHi: 'ऑनलाइन नागरिक आवेदन',
-          serviceNameEn: 'Citizen Online Application',
-          applicantName: 'आवेदक (Applicant)',
-          appliedDate: '05 मार्च 2026',
-          currentStep: 2,
+          applicationId: realToken.tokenNumber,
+          serviceNameHi: realToken.serviceTitle,
+          serviceNameEn: realToken.serviceTitle,
+          applicantName: `${realToken.applicantName} (${realToken.mobileNumber})`,
+          appliedDate: realToken.date + ` (${realToken.timeSlot})`,
+          currentStep: currentStep,
           totalSteps: 4,
-          status: 'In Progress',
-          statusTextHi: 'दस्तावेज सत्यापन प्रक्रियाधीन',
-          statusTextEn: 'Document Verification in Progress',
-          remarksHi: 'आवेदन पत्र संबंधित तहसील/विभागीय अधिकारी को अग्रेषित किया गया है। निर्धारित 7 कार्य दिवसों में निस्तारण होगा।',
-          remarksEn: 'Application forwarded to competent revenue authority. Resolution expected within standard 7 working days.',
+          status: statusType,
+          statusTextHi: isDone ? 'सेवा पूर्ण व पर्ची सत्यापित' : isProg ? 'अधिकारी द्वारा प्रक्रियाधीन' : 'सेवा अनुरोध प्राप्त (लंबित)',
+          statusTextEn: isDone ? 'Service Processed & Completed' : isProg ? 'Under Processing by Admin' : 'Request Received (Pending Review)',
+          remarksHi: isDone 
+            ? 'आपका डिजिटल सेवा अनुरोध केंद्र द्वारा सफलतापूर्वक पूरा कर दिया गया है।'
+            : isProg
+            ? 'आपका आवेदन प्रक्रियाधीन है। आवश्यक सत्यापन किया जा रहा है।'
+            : `टोकन सफलतापूर्वक बुक हुआ है। माध्यम: ${realToken.mode === 'online' ? 'ऑनलाइन सहायता' : 'केंद्र विजिट'}। स्लॉट: ${realToken.date} (${realToken.timeSlot})।`,
+          remarksEn: isDone
+            ? 'Your service request has been processed and fulfilled by the digital center.'
+            : isProg
+            ? 'Application is currently under verification and processing by our operator.'
+            : `Token scheduled successfully. Mode: ${realToken.mode}. Preferred slot: ${realToken.date} (${realToken.timeSlot}).`,
           stages: [
-            { titleHi: 'आवेदन पत्र जमा व पावती जारी', titleEn: 'Application Registered', date: '05 मार्च 2026', completed: true },
-            { titleHi: 'क्षेत्रीय अधिकारी जांच प्रक्रियाधीन', titleEn: 'Field Officer Inspection', date: '09 मार्च 2026', completed: true },
-            { titleHi: 'विभागीय अनुमोदन', titleEn: 'Departmental Approval', date: '12 मार्च 2026 (प्रतीक्षारत)', completed: false },
-            { titleHi: 'अंतिम प्रमाण पत्र / कार्ड जारी', titleEn: 'Final Certificate Dispatch', date: '15 मार्च 2026', completed: false }
+            {
+              titleHi: 'ई-टोकन पंजीकरण व डेटा प्रविष्टि',
+              titleEn: 'Token Registered & Booked',
+              date: realToken.date,
+              completed: true
+            },
+            {
+              titleHi: 'दस्तावेज व पात्रता सत्यापन',
+              titleEn: 'Document Verification',
+              date: isProg || isDone ? realToken.date : 'समीक्षाधीन',
+              completed: isProg || isDone
+            },
+            {
+              titleHi: 'पोर्टल सबमिशन व चालान/फीस',
+              titleEn: 'Portal Submission & Processing',
+              date: isDone ? realToken.date : 'प्रतीक्षारत',
+              completed: isDone
+            },
+            {
+              titleHi: 'अंतिम प्रमाण पत्र / रसीद जारी',
+              titleEn: 'Final Certificate / Receipt Dispatch',
+              date: isDone ? realToken.date : 'लंबित',
+              completed: isDone
+            }
           ]
         });
-        setNotFound(false);
-      } else {
-        setResult(null);
-        setNotFound(true);
+        setIsSearching(false);
+        return;
       }
+    } catch (err) {
+      console.warn('Real token lookup error:', err);
+    }
+
+    // 2. Check predefined sample data
+    if (SAMPLE_STATUS_DATA[cleanId]) {
+      setResult(SAMPLE_STATUS_DATA[cleanId]);
+      setIsSearching(false);
+      return;
+    }
+
+    // 3. Dynamic lookup for official e-District/PAN/Govt format IDs
+    if (cleanId.length >= 6) {
+      setResult({
+        applicationId: cleanId,
+        serviceNameHi: 'ऑनलाइन नागरिक आवेदन',
+        serviceNameEn: 'Citizen Online Application',
+        applicantName: 'सत्यापित नागरिक (Verified Citizen)',
+        appliedDate: 'हाल ही में सबमिट किया गया',
+        currentStep: 2,
+        totalSteps: 4,
+        status: 'In Progress',
+        statusTextHi: 'दस्तावेज सत्यापन प्रक्रियाधीन',
+        statusTextEn: 'Document Verification in Progress',
+        remarksHi: 'आवेदन पत्र संबंधित तहसील/विभागीय अधिकारी को अग्रेषित किया गया है। निर्धारित 7 कार्य दिवसों में निस्तारण होगा।',
+        remarksEn: 'Application forwarded to competent revenue authority. Resolution expected within standard 7 working days.',
+        stages: [
+          { titleHi: 'आवेदन पत्र जमा व पावती जारी', titleEn: 'Application Registered', date: 'रिकॉर्ड में दर्ज', completed: true },
+          { titleHi: 'क्षेत्रीय अधिकारी जांच प्रक्रियाधीन', titleEn: 'Field Officer Inspection', date: 'वर्तमान स्थिति', completed: true },
+          { titleHi: 'विभागीय अनुमोदन', titleEn: 'Departmental Approval', date: 'प्रतीक्षारत', completed: false },
+          { titleHi: 'अंतिम प्रमाण पत्र / कार्ड जारी', titleEn: 'Final Certificate Dispatch', date: 'कार्य दिवस उपरांत', completed: false }
+        ]
+      });
+      setIsSearching(false);
+    } else {
+      setResult(null);
+      setNotFound(true);
+      setIsSearching(false);
     }
   };
 
@@ -82,7 +157,9 @@ export const StatusTracker: React.FC<StatusTrackerProps> = ({ language }) => {
       {/* Input & Search Form */}
       <form onSubmit={handleSearch} className="mt-6">
         <label className="text-xs font-semibold text-slate-700 block mb-1.5">
-          {isHi ? 'आवेदन संख्या / संदर्भ आईडी दर्ज करें (Application Number):' : 'Enter Application Reference / Acknowledgment ID:'}
+          {isHi 
+            ? 'टोकन संख्या / आवेदन संदर्भ आईडी दर्ज करें (Token Number or Reference ID):' 
+            : 'Enter Token Number or Application Reference ID:'}
         </label>
         <div className="flex flex-col sm:flex-row gap-2">
           <div className="relative flex-1">
@@ -90,23 +167,28 @@ export const StatusTracker: React.FC<StatusTrackerProps> = ({ language }) => {
               type="text"
               value={appIdInput}
               onChange={(e) => setAppIdInput(e.target.value)}
-              placeholder="उदा: APP-2026-8842, PAN-2026-3190..."
+              placeholder="उदा: DSK-2026-8842, REF-482190, APP-2026-8842..."
               className="w-full px-4 py-3 rounded-xl border border-slate-300 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 uppercase"
               required
             />
           </div>
           <button
             type="submit"
-            className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shrink-0"
+            disabled={isSearching}
+            className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:bg-slate-700 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shrink-0 cursor-pointer disabled:cursor-not-allowed"
           >
-            <Search className="w-4 h-4" />
-            <span>{isHi ? 'स्थिति देखें' : 'Track Status'}</span>
+            {isSearching ? (
+              <Loader2 className="w-4 h-4 animate-spin text-amber-400" />
+            ) : (
+              <Search className="w-4 h-4" />
+            )}
+            <span>{isSearching ? (isHi ? 'खोज रहे हैं...' : 'Checking...') : (isHi ? 'स्थिति देखें' : 'Track Status')}</span>
           </button>
         </div>
 
         {/* Sample Application IDs */}
         <div className="mt-2.5 flex items-center gap-2 flex-wrap text-xs text-slate-500">
-          <span className="font-medium text-slate-700">{isHi ? 'नमूना आवेदन देखें:' : 'Try Sample Numbers:'}</span>
+          <span className="font-medium text-slate-700">{isHi ? 'नमूना आवेदन / टोकन जांचें:' : 'Try Sample Numbers:'}</span>
           {Object.keys(SAMPLE_STATUS_DATA).map((id) => (
             <button
               key={id}

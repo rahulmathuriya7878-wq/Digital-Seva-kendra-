@@ -107,11 +107,11 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Admin Portal Button */}
             <button
               onClick={onOpenAdminModal}
-              title={isHi ? 'प्राप्त टोकन व आवेदन पोर्टल (Admin)' : 'Admin Token Registry'}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold rounded-md border border-amber-300 bg-amber-50/90 hover:bg-amber-100 text-amber-900 transition-colors whitespace-nowrap cursor-pointer"
+              title={isHi ? 'एडमिन लॉगिन व प्राप्त टोकन पोर्टल' : 'Admin Login & Token Records'}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold rounded-md border border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors whitespace-nowrap cursor-pointer"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
-              <span className="hidden md:inline">{isHi ? 'टोकन रिकॉर्ड' : 'Token Records'}</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
+              <span className="hidden md:inline">{isHi ? 'एडमिन पैनल' : 'Admin Panel'}</span>
             </button>
 
             {/* Language Toggle Button */}
