@@ -1,0 +1,6 @@
+{
+  "name": "Digital Seva - Online Internet Services Portal",
+  "description": "ऑनलाइन इंटरनेट सेवा केंद्र - आधार, पैन, प्रमाण पत्र, बिजली बिल, सरकारी योजनाएं, फॉर्म व ऑनलाइन सेवाओं का सम्पूर्ण डिजिटल पोर्टल",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
