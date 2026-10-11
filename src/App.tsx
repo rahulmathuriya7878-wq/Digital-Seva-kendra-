@@ -215,11 +215,11 @@ export default function App() {
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
         
         {/* Quick Utility Feature Banners */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* 1. Primary Feature: Sarkari Naukri & Results Hub */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-700 via-blue-800 to-slate-900 text-white shadow-xs flex flex-col justify-between border border-indigo-500/30">
-            <div>
-              <div className="flex items-center justify-between mb-3">
+        <section className="max-w-4xl mx-auto">
+          {/* Primary Feature: Sarkari Naukri & Results Hub */}
+          <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-indigo-700 via-blue-800 to-slate-900 text-white shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-indigo-500/30">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
                 <div className="p-2 rounded-xl bg-white/20 backdrop-blur-xs">
                   <GraduationCap className="w-5 h-5 text-amber-300" />
                 </div>
@@ -227,10 +227,10 @@ export default function App() {
                   {isHi ? 'प्राथमिक सेवा' : 'Primary Service'}
                 </span>
               </div>
-              <h3 className="text-base sm:text-lg font-bold">
+              <h3 className="text-lg sm:text-xl font-bold">
                 {isHi ? 'सरकारी नौकरी व रिजल्ट्स' : 'Sarkari Naukri & Results'}
               </h3>
-              <p className="text-xs text-indigo-100 mt-1 leading-relaxed">
+              <p className="text-xs sm:text-sm text-indigo-100 max-w-xl leading-relaxed">
                 {isHi
                   ? 'एसएससी, रेलवे, पुलिस, शिक्षक भर्ती, एडमिट कार्ड व नवीनतम सरकारी रिजल्ट्स एक क्लिक में देखें।'
                   : 'Latest central & state govt recruitments, SSC, Railway, Police vacancies & admit cards.'}
@@ -247,96 +247,9 @@ export default function App() {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="mt-5 w-full py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors shadow-xs cursor-pointer"
+              className="py-3 px-6 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shadow-xs cursor-pointer shrink-0"
             >
               <span>{isHi ? 'सरकारी नौकरियां देखें' : 'View Sarkari Jobs'}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* 2. Electricity Bill Pay Quick Card */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 text-white shadow-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="p-2 rounded-xl bg-white/20 backdrop-blur-xs">
-                  <Zap className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-black/20 text-amber-100">
-                  {isHi ? 'भारत बिलपे (BBPS)' : 'BBPS Portal'}
-                </span>
-              </div>
-              <h3 className="text-base sm:text-lg font-bold">
-                {isHi ? 'बिजली बिल देखें व भुगतान' : 'Electricity Bill Payment'}
-              </h3>
-              <p className="text-xs text-amber-100 mt-1 leading-relaxed">
-                {isHi
-                  ? 'मीटर खाता संख्या से बिल चेक करें और तुरंत आधिकारिक डिजिटल रसीद प्राप्त करें।'
-                  : 'Pay state discom electricity bills with zero extra fees and get instant e-receipt.'}
-              </p>
-            </div>
-            <button
-              onClick={() => setIsBillModalOpen(true)}
-              className="mt-5 w-full py-2.5 rounded-xl bg-white hover:bg-amber-50 text-amber-900 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors shadow-xs cursor-pointer"
-            >
-              <span>{isHi ? 'बिल जांचें व भरें' : 'Check & Pay Bill'}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* 3. Photo Resizer Quick Card */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 text-white shadow-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="p-2 rounded-xl bg-white/10 backdrop-blur-xs">
-                  <FileCheck2 className="w-5 h-5 text-amber-400" />
-                </div>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white/10 text-slate-300">
-                  {isHi ? 'मुफ्त टूल' : '100% Free'}
-                </span>
-              </div>
-              <h3 className="text-base sm:text-lg font-bold">
-                {isHi ? 'फोटो व हस्ताक्षर रीसाइज़र' : 'Photo & Sign Resizer'}
-              </h3>
-              <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                {isHi
-                  ? 'सरकारी ऑनलाइन फॉर्म हेतु 20KB-50KB फोटो और 10KB-20KB हस्ताक्षर ब्राउज़र में बनाएं।'
-                  : 'Compress and resize photos & signs to strict govt form specs (20-50KB) in seconds.'}
-              </p>
-            </div>
-            <button
-              onClick={() => handleSelectNav('tools')}
-              className="mt-5 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors shadow-xs cursor-pointer"
-            >
-              <span>{isHi ? 'फोटो टूल खोलें' : 'Open Resizer Tool'}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* 4. Resume / Bio-Data Quick Card */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-700 to-slate-900 text-white shadow-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="p-2 rounded-xl bg-white/10 backdrop-blur-xs">
-                  <FileText className="w-5 h-5 text-emerald-300" />
-                </div>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white/10 text-emerald-200">
-                  {isHi ? 'जॉब बायोडाटा' : 'Job Bio-Data'}
-                </span>
-              </div>
-              <h3 className="text-base sm:text-lg font-bold">
-                {isHi ? 'बायोडाटा व रिज्यूमे मेकर' : 'Job Resume & Bio-Data'}
-              </h3>
-              <p className="text-xs text-emerald-100 mt-1 leading-relaxed">
-                {isHi
-                  ? 'प्राइवेट नौकरियों एवं भर्ती साक्षात्कारों हेतु 2 मिनट में स्वच्छ पीडीएफ बायोडाटा तैयार करें।'
-                  : 'Generate standard job bio-data and printable resume in clean formatted layout.'}
-              </p>
-            </div>
-            <button
-              onClick={() => setIsResumeModalOpen(true)}
-              className="mt-5 w-full py-2.5 rounded-xl bg-white hover:bg-emerald-50 text-emerald-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors shadow-xs cursor-pointer"
-            >
-              <span>{isHi ? 'बायोडाटा बनाएं' : 'Create Bio-Data'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
