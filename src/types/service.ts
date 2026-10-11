@@ -54,6 +54,7 @@ export interface ApplicationStatusResult {
 }
 
 export interface TokenBooking {
+  id?: string;
   tokenNumber: string;
   applicantName: string;
   mobileNumber: string;
@@ -69,5 +70,6 @@ export interface TokenBooking {
   isUrgent?: boolean;
   notes?: string;
   requiredDocuments?: string[];
+  status?: 'pending' | 'in-progress' | 'completed' | 'cancelled';
   createdAt?: string;
 }

@@ -14,6 +14,7 @@ import { ResumeBuilderModal } from './components/ResumeBuilderModal';
 import { GmailHubModal } from './components/GmailHubModal';
 import { GoogleDocsHubModal } from './components/GoogleDocsHubModal';
 import { GoogleSearchConsoleGuideModal } from './components/GoogleSearchConsoleGuideModal';
+import { AdminTokensPortal } from './components/AdminTokensPortal';
 import { Footer } from './components/Footer';
 import { 
   Zap, 
@@ -52,6 +53,7 @@ export default function App() {
   const [isDocsModalOpen, setIsDocsModalOpen] = useState<boolean>(false);
   const [docsTemplate, setDocsTemplate] = useState<{ title: string; content: string } | undefined>(undefined);
   const [isSearchConsoleModalOpen, setIsSearchConsoleModalOpen] = useState<boolean>(false);
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState<boolean>(false);
 
   const isHi = language === 'hi';
 
@@ -190,6 +192,7 @@ export default function App() {
           setDocsTemplate(undefined);
           setIsDocsModalOpen(true);
         }}
+        onOpenAdminModal={() => setIsAdminModalOpen(true)}
         onSelectNav={handleSelectNav}
         activeSection={activeSection}
       />
@@ -501,6 +504,17 @@ export default function App() {
         <GoogleSearchConsoleGuideModal
           language={language}
           onClose={() => setIsSearchConsoleModalOpen(false)}
+        />
+      )}
+
+      {isAdminModalOpen && (
+        <AdminTokensPortal
+          language={language}
+          onClose={() => setIsAdminModalOpen(false)}
+          onSendEmailToCitizen={(recipient, subject, body) => {
+            setIsAdminModalOpen(false);
+            handleOpenGmailWithContent(recipient, subject, body);
+          }}
         />
       )}
 

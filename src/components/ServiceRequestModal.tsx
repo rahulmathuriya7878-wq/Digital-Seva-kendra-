@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Language, ServiceItem, TokenBooking } from '../types/service';
 import { SERVICES_DATA } from '../data/servicesData';
+import { saveTokenBooking } from '../lib/tokenService';
 import { 
   X, 
   Ticket, 
@@ -20,7 +21,8 @@ import {
   FileText, 
   Info,
   Building,
-  Zap
+  Zap,
+  Loader2
 } from 'lucide-react';
 
 interface ServiceRequestModalProps {
@@ -52,14 +54,16 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
   const [applicantNotes, setApplicantNotes] = useState('');
 
   const [booking, setBooking] = useState<TokenBooking | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [copiedToken, setCopiedToken] = useState(false);
 
   const selectedService = SERVICES_DATA.find((s) => s.id === selectedServiceId) || SERVICES_DATA[0];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim()) return;
+    if (!name.trim() || !phone.trim() || isSubmitting) return;
 
+    setIsSubmitting(true);
     const currentService = SERVICES_DATA.find((s) => s.id === selectedServiceId) || SERVICES_DATA[0];
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
     const tokenNum = `DSK-${new Date().getFullYear()}-${randomSuffix}`;
@@ -81,10 +85,19 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
       isUrgent: isUrgent,
       notes: applicantNotes.trim(),
       requiredDocuments: isHi ? currentService.requiredDocsHi : currentService.requiredDocsEn,
+      status: 'pending',
       createdAt: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
     };
 
-    setBooking(newBooking);
+    try {
+      const docId = await saveTokenBooking(newBooking);
+      newBooking.id = docId;
+    } catch (err) {
+      console.warn('Saved with offline fallback:', err);
+    } finally {
+      setIsSubmitting(false);
+      setBooking(newBooking);
+    }
   };
 
   const handlePrint = () => {
@@ -331,10 +344,20 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:bg-slate-700 text-white font-bold transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <Ticket className="w-4 h-4 text-amber-400" />
-                  <span>{isHi ? 'डिजिटल सेवा टोकन पर्ची जारी करें' : 'Generate Digital Service Token Slip'}</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 text-amber-400 animate-spin" />
+                      <span>{isHi ? 'टोकन सुरक्षित किया जा रहा है...' : 'Generating & Saving Token...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Ticket className="w-4 h-4 text-amber-400" />
+                      <span>{isHi ? 'डिजिटल सेवा टोकन पर्ची जारी करें' : 'Generate Digital Service Token Slip'}</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>

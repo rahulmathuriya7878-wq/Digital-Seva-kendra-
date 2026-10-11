@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "tokenBookings": {
+      "title": "Token Booking",
+      "description": "Represents an online citizen service token booked through Digital Seva Kendra",
+      "type": "object",
+      "properties": {
+        "tokenNumber": {
+          "type": "string",
+          "description": "Unique token number like DSK-94821"
+        },
+        "referenceId": {
+          "type": "string",
+          "description": "Alphanumeric reference tracking code"
+        },
+        "applicantName": {
+          "type": "string",
+          "description": "Full name of the citizen applicant"
+        },
+        "mobileNumber": {
+          "type": "string",
+          "description": "10-digit mobile number of the applicant"
+        },
+        "serviceTitle": {
+          "type": "string",
+          "description": "Title of the requested government or internet service"
+        },
+        "serviceCategory": {
+          "type": "string",
+          "description": "Category of the service"
+        },
+        "officialDepartment": {
+          "type": "string",
+          "description": "Concerned government department"
+        },
+        "estimatedFee": {
+          "type": "string",
+          "description": "Estimated official or portal fee"
+        },
+        "date": {
+          "type": "string",
+          "description": "Appointment or preferred execution date"
+        },
+        "timeSlot": {
+          "type": "string",
+          "description": "Preferred time window"
+        },
+        "mode": {
+          "type": "string",
+          "description": "Delivery mode: online or center"
+        },
+        "cityOrDistrict": {
+          "type": "string",
+          "description": "Applicant district or city"
+        },
+        "isUrgent": {
+          "type": "boolean",
+          "description": "Whether tatkal/urgent priority requested"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional applicant note or requirement"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "in-progress", "completed", "cancelled"],
+          "description": "Workflow processing status handled by admin"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp string when token was booked"
+        }
+      },
+      "required": ["tokenNumber", "referenceId", "applicantName", "mobileNumber", "serviceTitle", "date", "timeSlot", "mode"]
+    }
+  },
+  "firestore": {
+    "/tokenBookings/{bookingId}": {
+      "schema": "tokenBookings",
+      "description": "Collection of all service token requests booked by citizens"
+    }
+  }
+}

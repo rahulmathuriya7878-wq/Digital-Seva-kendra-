@@ -1,6 +1,6 @@
 import React from 'react';
 import { Language } from '../types/service';
-import { Landmark, Globe, Ticket, Mail, FileText } from 'lucide-react';
+import { Landmark, Globe, Ticket, Mail, FileText, ShieldCheck } from 'lucide-react';
 
 interface HeaderProps {
   language: Language;
@@ -8,6 +8,7 @@ interface HeaderProps {
   onOpenTokenModal: () => void;
   onOpenGmailModal: () => void;
   onOpenDocsModal: () => void;
+  onOpenAdminModal: () => void;
   onSelectNav: (sectionId: string) => void;
   activeSection: string;
 }
@@ -18,6 +19,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenTokenModal,
   onOpenGmailModal,
   onOpenDocsModal,
+  onOpenAdminModal,
   onSelectNav,
   activeSection
 }) => {
@@ -100,6 +102,16 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <Mail className="w-3.5 h-3.5 text-rose-600" />
               <span className="hidden sm:inline">{isHi ? 'जीमेल' : 'Gmail'}</span>
+            </button>
+
+            {/* Admin Portal Button */}
+            <button
+              onClick={onOpenAdminModal}
+              title={isHi ? 'प्राप्त टोकन व आवेदन पोर्टल (Admin)' : 'Admin Token Registry'}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold rounded-md border border-amber-300 bg-amber-50/90 hover:bg-amber-100 text-amber-900 transition-colors whitespace-nowrap cursor-pointer"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
+              <span className="hidden md:inline">{isHi ? 'टोकन रिकॉर्ड' : 'Token Records'}</span>
             </button>
 
             {/* Language Toggle Button */}
