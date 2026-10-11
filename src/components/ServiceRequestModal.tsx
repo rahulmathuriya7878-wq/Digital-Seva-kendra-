@@ -97,15 +97,14 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
       createdAt: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
     };
 
-    try {
-      const docId = await saveTokenBooking(newBooking);
-      newBooking.id = docId;
-    } catch (err) {
-      console.warn('Saved with offline fallback:', err);
-    } finally {
-      setIsSubmitting(false);
-      setBooking(newBooking);
-    }
+    // Instant generation: show token immediately without network wait
+    setBooking(newBooking);
+    setIsSubmitting(false);
+
+    // Save to Firestore & local storage asynchronously in background
+    saveTokenBooking(newBooking).catch(err => {
+      console.warn('Background sync note:', err);
+    });
   };
 
   const handlePrint = () => {
