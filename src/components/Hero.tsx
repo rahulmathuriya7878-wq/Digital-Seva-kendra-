@@ -21,15 +21,6 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const isHi = language === 'hi';
 
-  const [copiedLink, setCopiedLink] = useState<boolean>(false);
-
-  const handleCopyPortalInfo = () => {
-    const textToCopy = `डिजिटल सेवा केंद्र (Digital Seva Kendra) - सरकारी नौकरी, आधार, पैन कार्ड, खसरा-खतौनी, बिजली बिल व ऑनलाइन नागरिक सेवाएं: ${window.location.href}`;
-    navigator.clipboard.writeText(textToCopy);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2500);
-  };
-
   const categories: { id: ServiceCategory; labelHi: string; labelEn: string }[] = [
     { id: 'all', labelHi: 'सभी सेवाएं', labelEn: 'All Services' },
     { id: 'jobs', labelHi: 'सरकारी नौकरी व रिजल्ट', labelEn: 'Sarkari Jobs & Results' },
@@ -46,43 +37,7 @@ export const Hero: React.FC<HeroProps> = ({
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         
-        {/* Easy Portal Search Name Highlight Box */}
-        <div className="max-w-2xl mx-auto mb-6 p-3 sm:p-3.5 bg-white/95 backdrop-blur-xs rounded-2xl border border-amber-300 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left ring-4 ring-amber-50">
-          <div className="flex items-center gap-3">
-            <span className="flex h-3 w-3 relative shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-            </span>
-            <div>
-              <div className="text-[11px] font-semibold text-slate-500">
-                {isHi ? 'वेबसाइट का आसान नाम (Google या वेब पर सर्च करें):' : 'Easy Web Search Name (Search on Web / Google):'}
-              </div>
-              <div className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2 flex-wrap justify-center sm:justify-start">
-                <span className="text-amber-800 tracking-tight">डिजिटल सेवा केंद्र</span>
-                <span className="text-slate-300 font-normal">|</span>
-                <span className="text-indigo-900 tracking-tight">Digital Seva Kendra</span>
-              </div>
-            </div>
-          </div>
-          
-          <button
-            onClick={handleCopyPortalInfo}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-semibold border border-amber-200 transition-colors cursor-pointer shrink-0 active:scale-95"
-            title="पोर्टल का नाम और लिंक कॉपी करें"
-          >
-            {copiedLink ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-emerald-600" />
-                <span className="text-emerald-700">{isHi ? 'नाम व लिंक कॉपी हो गया!' : 'Copied!'}</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-3.5 h-3.5 text-amber-700" />
-                <span>{isHi ? 'नाम व लिंक कॉपी करें' : 'Copy Name & Link'}</span>
-              </>
-            )}
-          </button>
-        </div>
+
 
         {/* National civic banner headline */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
