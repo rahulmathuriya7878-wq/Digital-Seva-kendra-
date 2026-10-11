@@ -58,8 +58,16 @@ export interface TokenBooking {
   applicantName: string;
   mobileNumber: string;
   serviceTitle: string;
+  serviceCategory?: string;
+  officialDepartment?: string;
+  estimatedFee?: string;
   date: string;
   timeSlot: string;
   mode: 'online' | 'center';
   referenceId: string;
+  cityOrDistrict?: string;
+  isUrgent?: boolean;
+  notes?: string;
+  requiredDocuments?: string[];
+  createdAt?: string;
 }
