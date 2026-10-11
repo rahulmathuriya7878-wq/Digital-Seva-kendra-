@@ -78,7 +78,7 @@ export const AdminTokensPortal: React.FC<AdminTokensPortalProps> = ({
 
   const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (pinInput.trim() === DEFAULT_ADMIN_PIN || pinInput.trim() === '7878') {
+    if (pinInput.trim() === DEFAULT_ADMIN_PIN) {
       setIsAuthenticated(true);
       sessionStorage.setItem('dsk_admin_auth', 'true');
       setPinError('');
@@ -128,8 +128,8 @@ export const AdminTokensPortal: React.FC<AdminTokensPortalProps> = ({
     const cleanPhone = phone.replace(/\D/g, '');
     const targetPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
     const message = isHi
-      ? `नमस्ते ${token.applicantName} जी, आपके डिजिटल सेवा टोकन (${token.tokenNumber}) संदर्भ में डिजिटल सेवा केंद्र से संपर्क किया जा रहा है। क्या आप उपलब्ध हैं?`
-      : `Hello ${token.applicantName}, regarding your Digital Seva Token (${token.tokenNumber}), contacting from Digital Seva Kendra. Are you available?`;
+      ? `नमस्ते ${token.applicantName} जी, आपके डिजिटल सेवा टोकन (${token.tokenNumber}) संदर्भ में डिजिटल एवं जन सेवा केंद्र पोर्टल से संपर्क किया जा रहा है। क्या आप उपलब्ध हैं?`
+      : `Hello ${token.applicantName}, regarding your Digital Seva Token (${token.tokenNumber}), contacting from Digital & Jan Seva Kendra Portal. Are you available?`;
     window.open(`https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(message)}`, '_blank');
   };
 

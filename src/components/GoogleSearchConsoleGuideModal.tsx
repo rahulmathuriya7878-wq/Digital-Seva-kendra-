@@ -127,7 +127,7 @@ export const GoogleSearchConsoleGuideModal: React.FC<GoogleSearchConsoleGuideMod
               </div>
               <p className="text-xs text-slate-600">
                 {isHi 
-                  ? 'ऊपर दिए गए लिंक पर जाएं और अपनी Gmail ID (rahulmathuriya7878@gmail.com) से लॉगिन करें।' 
+                  ? 'ऊपर दिए गए लिंक पर जाएं और अपनी Gmail ID / Google Account से लॉगिन करें।' 
                   : 'Go to Search Console and sign in with your Google account.'}
               </p>
             </div>

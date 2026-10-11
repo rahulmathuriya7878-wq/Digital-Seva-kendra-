@@ -32,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
                 <Landmark className="w-4 h-4" />
               </div>
               <span className="text-base font-bold text-white tracking-tight">
-                {isHi ? 'डिजिटल सेवा केंद्र' : 'Digital Seva Kendra'}
+                {isHi ? 'डिजिटल एवं जन सेवा केंद्र पोर्टल' : 'Digital & Jan Seva Kendra Portal'}
               </span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
               </li>
               <li>
                 <button onClick={() => onSelectNav('services')} className="hover:text-white transition-colors">
-                  {isHi ? 'आय, जाति, निवास प्रमाण पत्र' : 'Revenue Certificates'}
+                  {isHi ? 'जाति व निवास प्रमाण पत्र' : 'Revenue Certificates'}
                 </button>
               </li>
               <li>

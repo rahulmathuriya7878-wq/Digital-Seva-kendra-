@@ -266,37 +266,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     searchKeywords: ['caste certificate', 'caste', 'jati', 'jaati', 'obc', 'sc', 'st', 'ews', 'praman patra', 'जाति प्रमाण पत्र', 'जाति', 'ईडब्ल्यूएस', 'ओबीसी', 'प्रमाण पत्र']
   },
   {
-    id: 'income-certificate',
-    titleHi: 'आय प्रमाण पत्र (Income Certificate)',
-    titleEn: 'Income Certificate Application',
-    category: 'certificates',
-    shortDescHi: 'छात्रवृत्ति, सरकारी योजनाओं व दाखिले हेतु परिवार की वार्षिक आय का प्राधिकृत प्रमाण पत्र।',
-    shortDescEn: 'Official annual family income certificate for scholarships, subsidy schemes and admissions.',
-    departmentHi: 'राजस्व विभाग (e-District / Tehsildar)',
-    departmentEn: 'Revenue Department (Tehsildar / Sub-Divisional Magistrate)',
-    officialUrl: 'https://edistrict.up.gov.in/',
-    feeHi: 'सेवा शुल्क ₹15-₹30',
-    feeEn: 'Service Fee ₹15-₹30',
-    processingTimeHi: '7 कार्य दिवस',
-    processingTimeEn: '7 Working Days',
-    requiredDocsHi: ['आधार कार्ड', 'वेतन पर्ची / आयकर रिटर्न / आय स्वघोषणा पत्र', 'बिजली बिल या ग्राम प्रधान / पार्षद की रिपोर्ट', 'पासपोर्ट फोटो'],
-    requiredDocsEn: ['Aadhaar Card', 'Salary Slip / ITR / Self-Declaration', 'Electricity bill or local councilor report', 'Passport Photo'],
-    stepsHi: [
-      'e-District पोर्टल पर "आय प्रमाण पत्र" का चयन करें।',
-      'परिवार के सभी सदस्यों का विवरण तथा व्यवसाय से होने वाली वार्षिक आय दर्ज करें।',
-      'दस्तावेज अपलोड करें और ₹15 का ऑनलाइन भुगतान करें।',
-      'तहसीलदार अनुमोदन के पश्चात डिजिटल कॉपी डाउनलोड करें।'
-    ],
-    stepsEn: [
-      'Select Income Certificate on state e-District portal.',
-      'Enter family member details and annual income breakdown from occupation.',
-      'Upload required proofs and submit ₹15 application fee.',
-      'Download digitally verified copy after Tehsildar approval.'
-    ],
-    iconName: 'BadgePercent',
-    searchKeywords: ['income certificate', 'income', 'aay', 'aay praman patra', 'salary certificate', 'आय प्रमाण पत्र', 'आय', 'वार्षिक आय', 'सैलरी प्रमाण पत्र']
-  },
-  {
     id: 'domicile-certificate',
     titleHi: 'निवास प्रमाण पत्र (Domicile / Residence Certificate)',
     titleEn: 'Domicile / Residence Certificate',
@@ -619,6 +588,37 @@ export const SERVICES_DATA: ServiceItem[] = [
     ],
     iconName: 'FileText',
     searchKeywords: ['resume', 'biodata', 'bio data', 'cv', 'curriculum vitae', 'job resume', 'बायोडाटा', 'रिज्यूमे', 'सीवी', 'नौकरी बायोडाटा', 'रिज्यूम', 'नौकरी फॉर्म']
+  },
+  {
+    id: 'other-services',
+    titleHi: 'अन्य सेवाएं व ऑनलाइन सहायता (Other Services)',
+    titleEn: 'Other Citizen Services & Online Form Assistance',
+    category: 'welfare',
+    shortDescHi: 'सूची में न मिलने वाली किसी भी अन्य सरकारी योजना, ऑनलाइन फॉर्म, शिकायत, छात्रवृत्ति या साइबर कैफे कार्य हेतु सहायता।',
+    shortDescEn: 'Assistance for any other govt scheme, application form, grievance, scholarship or cyber cafe work.',
+    departmentHi: 'डिजिटल एवं जन सेवा केंद्र सहायता डेस्क (Helpdesk)',
+    departmentEn: 'Digital Seva Helpdesk & Citizen Support',
+    officialUrl: 'https://www.india.gov.in/',
+    feeHi: 'सरकारी नियमानुसार / कार्य अनुसार',
+    feeEn: 'As per standard govt rules',
+    processingTimeHi: 'उसी दिन / त्वरित',
+    processingTimeEn: 'Same Day / Fast',
+    requiredDocsHi: ['आधार कार्ड / पहचान प्रमाण', 'संबंधित कार्य के आवश्यक दस्तावेज (यदि उपलब्ध हों)'],
+    requiredDocsEn: ['Aadhaar Card / Photo ID', 'Relevant application documents (if available)'],
+    stepsHi: [
+      'टोकन बुक करें और अपने कार्य का विवरण दर्ज करें।',
+      'ऑपरेटर द्वारा ऑनलाइन फॉर्म व आधिकारिक पोर्टल पर प्रक्रिया की जाएगी।',
+      'सफल सबमिशन उपरांत रसीद व संदर्भ संख्या प्राप्त करें।'
+    ],
+    stepsEn: [
+      'Book token and specify your required service.',
+      'Operator processes the online application on the official portal.',
+      'Receive official submission receipt and tracking number.'
+    ],
+    iconName: 'HelpCircle',
+    badgeHi: 'नागरिक सहायता',
+    badgeEn: 'Support',
+    searchKeywords: ['other', 'other services', 'aanya', 'anya', 'anya seva', 'custom service', 'online form', 'help', 'अन्य', 'अन्य सेवा', 'अन्य सेवाएं', 'सहायता', 'ऑनलाइन कार्य']
   }
 ];
 

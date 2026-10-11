@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Language, ServiceCategory, ServiceItem } from './types/service';
 import { SERVICES_DATA } from './data/servicesData';
 import { Header } from './components/Header';
@@ -99,12 +99,13 @@ export default function App() {
       rashan: ['ration', 'nfsa', 'राशन'],
       ration: ['rashan', 'राशन'],
       jati: ['caste', 'जाति'],
-      aay: ['income', 'आय'],
       niwas: ['domicile', 'residence', 'निवास'],
       kisan: ['pm kisan', 'किसान'],
       shram: ['eshram', 'मजदूर', 'श्रम'],
       cv: ['resume', 'biodata', 'सीवी'],
-      dl: ['driving', 'licence', 'license', 'सारथी', 'डीएल']
+      dl: ['driving', 'licence', 'license', 'सारथी', 'डीएल'],
+      anya: ['other', 'अन्य', 'aanya', 'other-services'],
+      aanya: ['other', 'अन्य', 'anya', 'other-services']
     };
 
     // Expand search terms with recognized synonyms
@@ -173,6 +174,39 @@ export default function App() {
     setIsTokenModalOpen(true);
   };
 
+  const handleFocusSearch = () => {
+    const el = document.getElementById('main-search-input');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.focus();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) {
+        return;
+      }
+      if (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+        e.preventDefault();
+        handleFocusSearch();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleSelectServiceItem = (service: ServiceItem) => {
+    if (service.id === 'electricity-bill') {
+      setIsBillModalOpen(true);
+    } else if (service.id === 'resume-biodata-maker') {
+      setIsResumeModalOpen(true);
+    } else {
+      setSelectedDetailService(service);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900 selection:bg-amber-100 selection:text-amber-900">
       
@@ -209,6 +243,8 @@ export default function App() {
           if (el) el.scrollIntoView({ behavior: 'smooth' });
         }}
         totalServicesCount={SERVICES_DATA.length}
+        filteredServices={filteredServices}
+        onSelectService={handleSelectServiceItem}
       />
 
       {/* Main Content Area */}
@@ -273,6 +309,36 @@ export default function App() {
             </div>
           </div>
 
+          {/* Active Search Result Feedback Banner */}
+          {searchQuery.trim().length > 0 && (
+            <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 border border-amber-200 text-amber-950 shadow-xs">
+              <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold shadow-2xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                  <span>{isHi ? 'सक्रिय खोज' : 'Active Search'}</span>
+                </div>
+                <div className="text-xs sm:text-sm font-medium">
+                  <span>{isHi ? 'खोजा गया शब्द:' : 'Query:'} </span>
+                  <strong className="text-amber-950 bg-white/90 px-2 py-0.5 rounded border border-amber-300 font-bold">
+                    "{searchQuery}"
+                  </strong>
+                  <span className="ml-2 text-xs font-bold px-2 py-0.5 rounded-full bg-amber-200 text-amber-950">
+                    {filteredServices.length} {isHi ? 'सेवाएं' : 'found'}
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('all');
+                }}
+                className="px-3 py-1.5 text-xs font-bold rounded-lg bg-white hover:bg-amber-100 border border-amber-300 text-amber-950 transition-colors shadow-2xs cursor-pointer"
+              >
+                {isHi ? 'खोज हटाएं (Clear Search)' : 'Clear Search'}
+              </button>
+            </div>
+          )}
+
           {/* Cards Grid */}
           {filteredServices.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -281,15 +347,7 @@ export default function App() {
                   key={service.id}
                   service={service}
                   language={language}
-                  onSelectService={(s) => {
-                    if (s.id === 'electricity-bill') {
-                      setIsBillModalOpen(true);
-                    } else if (s.id === 'resume-biodata-maker') {
-                      setIsResumeModalOpen(true);
-                    } else {
-                      setSelectedDetailService(s);
-                    }
-                  }}
+                  onSelectService={handleSelectServiceItem}
                 />
               ))}
             </div>
@@ -348,10 +406,6 @@ export default function App() {
           language={language}
           onClose={() => setSelectedDetailService(null)}
           onRequestAssistance={handleRequestAssistanceFromDetail}
-          onExportToDocs={(title, content) => {
-            setSelectedDetailService(null);
-            handleOpenDocsWithContent(title, content);
-          }}
         />
       )}
 

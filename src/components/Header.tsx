@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div className="flex flex-col">
               <span className="text-base sm:text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap leading-tight">
-                {isHi ? 'डिजिटल सेवा केंद्र' : 'Digital Seva Kendra'}
+                {isHi ? 'डिजिटल एवं जन सेवा केंद्र पोर्टल' : 'Digital & Jan Seva Kendra Portal'}
               </span>
               <span className="text-[11px] text-slate-500 font-medium whitespace-nowrap">
                 {isHi ? 'ऑनलाइन नागरिक इंटरनेट सेवाएं' : 'National Citizen Internet Services'}

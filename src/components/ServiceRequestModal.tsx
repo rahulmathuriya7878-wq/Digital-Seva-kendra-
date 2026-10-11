@@ -15,7 +15,8 @@ import {
   ShieldCheck, 
   MapPin,
   Loader2,
-  MessageCircle
+  MessageCircle,
+  FileText
 } from 'lucide-react';
 
 interface ServiceRequestModalProps {
@@ -35,6 +36,7 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [district, setDistrict] = useState('');
+  const [customServiceName, setCustomServiceName] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [selectedServiceId, setSelectedServiceId] = useState(initialService?.id || SERVICES_DATA[0].id);
 
@@ -77,11 +79,15 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
       year: 'numeric'
     });
 
+    const finalServiceTitle = (selectedServiceId === 'other-services' && customServiceName.trim())
+      ? (isHi ? `अन्य सेवा: ${customServiceName.trim()}` : `Other Service: ${customServiceName.trim()}`)
+      : (isHi ? currentService.titleHi : currentService.titleEn);
+
     const newBooking: TokenBooking = {
       tokenNumber: tokenNum,
       applicantName: name.trim(),
       mobileNumber: cleanPhone,
-      serviceTitle: isHi ? currentService.titleHi : currentService.titleEn,
+      serviceTitle: finalServiceTitle,
       serviceCategory: currentService.category,
       officialDepartment: isHi ? currentService.departmentHi : currentService.departmentEn,
       estimatedFee: isHi ? currentService.feeHi : currentService.feeEn,
@@ -114,8 +120,8 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
   const handleCopySummary = () => {
     if (!booking) return;
     const summary = isHi
-      ? `डिजिटल सेवा टोकन पर्ची\n--------------------------\nटोकन संख्या: ${booking.tokenNumber}\nसंदर्भ आईडी: ${booking.referenceId}\nआवेदक का नाम: ${booking.applicantName}\nमोबाइल नंबर: ${booking.mobileNumber}\nजिला/शहर: ${booking.cityOrDistrict}\nसेवा: ${booking.serviceTitle}\nविभाग: ${booking.officialDepartment || '-'}\nतारीख: ${booking.date}\n\nडिजिटल सेवा केंद्र पोर्टल`
-      : `Digital Seva Token Slip\n--------------------------\nToken No: ${booking.tokenNumber}\nRef ID: ${booking.referenceId}\nApplicant: ${booking.applicantName}\nMobile No: ${booking.mobileNumber}\nDistrict: ${booking.cityOrDistrict}\nService: ${booking.serviceTitle}\nDept: ${booking.officialDepartment || '-'}\nDate: ${booking.date}\n\nDigital Seva Kendra Portal`;
+      ? `डिजिटल सेवा टोकन पर्ची\n--------------------------\nटोकन संख्या: ${booking.tokenNumber}\nसंदर्भ आईडी: ${booking.referenceId}\nआवेदक का नाम: ${booking.applicantName}\nमोबाइल नंबर: ${booking.mobileNumber}\nजिला/शहर: ${booking.cityOrDistrict}\nसेवा: ${booking.serviceTitle}\nविभाग: ${booking.officialDepartment || '-'}\nतारीख: ${booking.date}\n\nडिजिटल एवं जन सेवा केंद्र पोर्टल`
+      : `Digital Seva Token Slip\n--------------------------\nToken No: ${booking.tokenNumber}\nRef ID: ${booking.referenceId}\nApplicant: ${booking.applicantName}\nMobile No: ${booking.mobileNumber}\nDistrict: ${booking.cityOrDistrict}\nService: ${booking.serviceTitle}\nDept: ${booking.officialDepartment || '-'}\nDate: ${booking.date}\n\nDigital & Jan Seva Kendra Portal`;
 
     navigator.clipboard.writeText(summary);
     setCopiedToken(true);
@@ -184,6 +190,27 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
                   <span>{isHi ? 'समय सीमा:' : 'Time:'} <strong className="text-slate-700">{isHi ? selectedService.processingTimeHi : selectedService.processingTimeEn}</strong></span>
                 </div>
               </div>
+
+              {/* Other Service Custom Name Slot (अन्य सेवा का स्लॉट) */}
+              {selectedServiceId === 'other-services' && (
+                <div className="p-3.5 bg-amber-50/80 rounded-xl border border-amber-300 space-y-1.5 animate-in fade-in duration-200">
+                  <label className="text-xs sm:text-sm font-bold text-amber-950 flex items-center gap-1.5">
+                    <FileText className="w-4 h-4 text-amber-600" />
+                    <span>{isHi ? 'अन्य सेवा का नाम / कार्य दर्ज करें:' : 'Enter Other Service Name / Work:'}</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={customServiceName}
+                    onChange={(e) => setCustomServiceName(e.target.value)}
+                    placeholder={isHi ? 'जैसे: स्कॉलरशिप फॉर्म, पुलिस चरित्र प्रमाण पत्र, पेंशन, छात्रवृत्ति...' : 'e.g. Scholarship Form, Character Certificate, Pension...'}
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-amber-300 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-sm font-medium text-slate-900 shadow-2xs"
+                    required
+                  />
+                  <p className="text-[11px] text-amber-800 font-medium">
+                    {isHi ? '💡 आप जिस सेवा, ऑनलाइन फॉर्म या योजना का काम कराना चाहते हैं उसका नाम यहां लिखें।' : '💡 Enter the name or details of the online form or service you need assistance with.'}
+                  </p>
+                </div>
+              )}
 
               {/* 2. Applicant Full Name */}
               <div>
@@ -305,7 +332,7 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
                 <div className="p-3.5 bg-slate-900 text-white flex items-center justify-between border-b-2 border-amber-500">
                   <div>
                     <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block">
-                      {isHi ? 'डिजिटल सेवा केंद्र • ई-टोकन पावती' : 'DIGITAL SEVA KENDRA • TOKEN SLIP'}
+                      {isHi ? 'डिजिटल एवं जन सेवा केंद्र पोर्टल • ई-टोकन पावती' : 'DIGITAL & JAN SEVA KENDRA PORTAL • TOKEN SLIP'}
                     </span>
                     <span className="text-xs font-semibold text-white">
                       {booking.serviceTitle}

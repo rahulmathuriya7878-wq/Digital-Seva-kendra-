@@ -286,8 +286,8 @@ export const BillPaymentModal: React.FC<BillPaymentModalProps> = ({ language, on
                         ? `बिजली बिल भुगतान रसीद - खाता संख्या: ${consumerNumber} (Tx: ${txId})`
                         : `Electricity Bill Payment E-Receipt - Account: ${consumerNumber} (Tx: ${txId})`;
                       const body = isHi
-                        ? `प्रिय उपभोक्ता,\n\nआपके बिजली बिल का सफल भुगतान हो चुका है।\n\nउपभोक्ता खाता: ${consumerNumber}\nउपभोक्ता नाम: ${consumerName}\nलेनदेन आईडी: ${txId}\nभुगतान तिथि: ${paidTimestamp}\nभुगतान राशि: ₹${billAmount}.00\nभुगतान माध्यम: BBPS / UPI\n\nडिजिटल सेवा केंद्र पोर्टल द्वारा प्रेषित।`
-                        : `Dear Consumer,\n\nYour electricity bill has been paid successfully.\n\nAccount Number: ${consumerNumber}\nConsumer Name: ${consumerName}\nTransaction ID: ${txId}\nTimestamp: ${paidTimestamp}\nAmount Paid: ₹${billAmount}.00\nPayment Mode: BBPS / UPI\n\nSent via Digital Seva Portal.`;
+                        ? `प्रिय उपभोक्ता,\n\nआपके बिजली बिल का सफल भुगतान हो चुका है।\n\nउपभोक्ता खाता: ${consumerNumber}\nउपभोक्ता नाम: ${consumerName}\nलेनदेन आईडी: ${txId}\nभुगतान तिथि: ${paidTimestamp}\nभुगतान राशि: ₹${billAmount}.00\nभुगतान माध्यम: BBPS / UPI\n\nडिजिटल एवं जन सेवा केंद्र पोर्टल द्वारा प्रेषित।`
+                        : `Dear Consumer,\n\nYour electricity bill has been paid successfully.\n\nAccount Number: ${consumerNumber}\nConsumer Name: ${consumerName}\nTransaction ID: ${txId}\nTimestamp: ${paidTimestamp}\nAmount Paid: ₹${billAmount}.00\nPayment Mode: BBPS / UPI\n\nSent via Digital & Jan Seva Kendra Portal.`;
                       onEmailReceipt(subject, body);
                     }}
                     className="w-full sm:w-auto py-2.5 px-3 rounded-lg border border-rose-300 bg-rose-50 hover:bg-rose-100 text-rose-800 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"

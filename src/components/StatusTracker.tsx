@@ -10,8 +10,8 @@ interface StatusTrackerProps {
 
 export const StatusTracker: React.FC<StatusTrackerProps> = ({ language }) => {
   const isHi = language === 'hi';
-  const [appIdInput, setAppIdInput] = useState<string>('APP-2026-8842');
-  const [result, setResult] = useState<ApplicationStatusResult | null>(SAMPLE_STATUS_DATA['APP-2026-8842']);
+  const [appIdInput, setAppIdInput] = useState<string>('');
+  const [result, setResult] = useState<ApplicationStatusResult | null>(null);
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
 
@@ -148,7 +148,7 @@ export const StatusTracker: React.FC<StatusTrackerProps> = ({ language }) => {
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 mt-1">
             {isHi
-              ? 'आय, जाति, निवास प्रमाण पत्र, पैन कार्ड या पीएम किसान आवेदन की वास्तविक समय स्थिति जांचें।'
+              ? 'जाति, निवास प्रमाण पत्र, पैन कार्ड या पीएम किसान आवेदन की वास्तविक समय स्थिति जांचें।'
               : 'Track real-time progress of your revenue certificate, PAN card, or welfare scheme application.'}
           </p>
         </div>
@@ -186,20 +186,6 @@ export const StatusTracker: React.FC<StatusTrackerProps> = ({ language }) => {
           </button>
         </div>
 
-        {/* Sample Application IDs */}
-        <div className="mt-2.5 flex items-center gap-2 flex-wrap text-xs text-slate-500">
-          <span className="font-medium text-slate-700">{isHi ? 'नमूना आवेदन / टोकन जांचें:' : 'Try Sample Numbers:'}</span>
-          {Object.keys(SAMPLE_STATUS_DATA).map((id) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => handleQuickSample(id)}
-              className="text-amber-800 hover:underline font-mono bg-amber-50 px-2 py-0.5 rounded border border-amber-200/60"
-            >
-              {id}
-            </button>
-          ))}
-        </div>
       </form>
 
       {/* Not Found State */}

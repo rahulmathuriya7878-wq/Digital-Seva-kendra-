@@ -15,15 +15,15 @@ export const ResumeBuilderModal: React.FC<ResumeBuilderModalProps> = ({
 }) => {
   const isHi = language === 'hi';
 
-  const [fullName, setFullName] = useState('राहुल मथुरिया (Rahul Mathuriya)');
-  const [fatherName, setFatherName] = useState('श्री राम प्रसाद मथुरिया');
-  const [dob, setDob] = useState('15/07/2000');
-  const [phone, setPhone] = useState('9876543210');
-  const [email, setEmail] = useState('rahulmathuriya7878@gmail.com');
-  const [address, setAddress] = useState('ग्राम व पोस्ट: शांति नगर, जिला: जयपुर, राजस्थान - 302001');
-  const [qualification, setQualification] = useState('स्नातक (B.A. / B.Com) - 2022, 12th (Senior Secondary) - 2018');
-  const [skills, setSkills] = useState('Computer Basic, MS Office, Hindi & English Typing, Internet Data Entry');
-  const [experience, setExperience] = useState('2 वर्ष का इंटरनेट कैफे / कंप्यूटर ऑपरेटर कार्य अनुभव (Fresher / Experienced)');
+  const [fullName, setFullName] = useState('अभ्यर्थी का नाम (Candidate Name)');
+  const [fatherName, setFatherName] = useState('पिता का नाम (Father Name)');
+  const [dob, setDob] = useState('01/01/2000');
+  const [phone, setPhone] = useState('98XXXXXXXX');
+  const [email, setEmail] = useState('candidate@email.com');
+  const [address, setAddress] = useState('ग्राम व पोस्ट: ________, जिला: ________, राज्य - पिन कोड');
+  const [qualification, setQualification] = useState('10th / 12th / स्नातक (Graduate)');
+  const [skills, setSkills] = useState('कंप्यूटर बेसिक (MS Office), टाइपिंग व इंटरनेट कार्य');
+  const [experience, setExperience] = useState('फ्रेशर (Fresher) / संबंधित क्षेत्र में अनुभव');
 
   const handlePrint = () => {
     window.print();
@@ -208,11 +208,11 @@ export const ResumeBuilderModal: React.FC<ResumeBuilderModalProps> = ({
             <div className="pt-6 flex justify-between font-sans text-xs">
               <div>
                 <div>Date: _________</div>
-                <div>Place: Jaipur</div>
+                <div>Place: _________</div>
               </div>
               <div className="text-right">
                 <div className="h-6"></div>
-                <div className="font-bold">({fullName.split(' ')[0]})</div>
+                <div className="font-bold">({fullName || 'अभ्यर्थी'})</div>
                 <div className="text-slate-400 text-[10px]">Candidate Signature</div>
               </div>
             </div>
@@ -251,8 +251,8 @@ ${experience}
 मैं प्रमाणित करता/करती हूँ कि उपरोक्त सभी विवरण मेरे ज्ञान के अनुसार पूर्णतः सत्य एवं सही हैं।
 
 दिनांक: ${new Date().toLocaleDateString('hi-IN')}
-स्थान: जयपुर
-हस्ताक्षर: (${fullName.split(' ')[0]})`;
+स्थान: _________
+हस्ताक्षर: (${fullName || 'अभ्यर्थी'})`;
 
                 onExportToGoogleDocs(title, content);
               }}
