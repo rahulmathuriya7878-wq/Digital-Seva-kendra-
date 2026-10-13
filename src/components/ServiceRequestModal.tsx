@@ -16,7 +16,8 @@ import {
   MapPin,
   Loader2,
   MessageCircle,
-  FileText
+  FileText,
+  CreditCard
 } from 'lucide-react';
 
 interface ServiceRequestModalProps {
@@ -43,6 +44,8 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
   const [booking, setBooking] = useState<TokenBooking | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copiedToken, setCopiedToken] = useState(false);
+  const [showPaymentQR, setShowPaymentQR] = useState(false);
+  const [paymentReceived, setPaymentReceived] = useState(false);
 
   const selectedService = SERVICES_DATA.find((s) => s.id === selectedServiceId) || SERVICES_DATA[0];
 
@@ -120,12 +123,22 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
   const handleCopySummary = () => {
     if (!booking) return;
     const summary = isHi
-      ? `डिजिटल सेवा टोकन पर्ची\n--------------------------\nटोकन संख्या: ${booking.tokenNumber}\nसंदर्भ आईडी: ${booking.referenceId}\nआवेदक का नाम: ${booking.applicantName}\nमोबाइल नंबर: ${booking.mobileNumber}\nजिला/शहर: ${booking.cityOrDistrict}\nसेवा: ${booking.serviceTitle}\nविभाग: ${booking.officialDepartment || '-'}\nतारीख: ${booking.date}\n\nडिजिटल एवं जन सेवा केंद्र पोर्टल`
-      : `Digital Seva Token Slip\n--------------------------\nToken No: ${booking.tokenNumber}\nRef ID: ${booking.referenceId}\nApplicant: ${booking.applicantName}\nMobile No: ${booking.mobileNumber}\nDistrict: ${booking.cityOrDistrict}\nService: ${booking.serviceTitle}\nDept: ${booking.officialDepartment || '-'}\nDate: ${booking.date}\n\nDigital & Jan Seva Kendra Portal`;
+      ? `डिजिटल एवं जन सेवा केंद्र पोर्टल - टोकन पर्ची\n--------------------------\nटोकन संख्या: ${booking.tokenNumber}\nसंदर्भ आईडी: ${booking.referenceId}\nआवेदक का नाम: ${booking.applicantName}\nमोबाइल नंबर: ${booking.mobileNumber}\nजिला/शहर: ${booking.cityOrDistrict}\nसेवा: ${booking.serviceTitle}\nसरकारी शुल्क: ${booking.estimatedFee}\nतारीख: ${booking.date}\n\nडिजिटल एवं जन सेवा केंद्र पोर्टल`
+      : `Digital & Jan Seva Kendra Portal - Token Slip\n--------------------------\nToken No: ${booking.tokenNumber}\nRef ID: ${booking.referenceId}\nApplicant: ${booking.applicantName}\nMobile No: ${booking.mobileNumber}\nDistrict: ${booking.cityOrDistrict}\nService: ${booking.serviceTitle}\nFee: ${booking.estimatedFee}\nDate: ${booking.date}\n\nDigital & Jan Seva Kendra Portal`;
 
     navigator.clipboard.writeText(summary);
     setCopiedToken(true);
     setTimeout(() => setCopiedToken(false), 2500);
+  };
+
+  const handleWhatsAppShare = () => {
+    if (!booking) return;
+    const summary = isHi
+      ? `💬 *डिजिटल एवं जन सेवा केंद्र - टोकन पर्ची*\n\n🎫 *टोकन नंबर:* \`${booking.tokenNumber}\`\n📌 *संदर्भ आईडी:* ${booking.referenceId}\n👤 *आवेदक:* ${booking.applicantName}\n📱 *मोबाइल:* +91 ${booking.mobileNumber}\n📍 *जिला:* ${booking.cityOrDistrict}\n🛠 *सेवा:* ${booking.serviceTitle}\n💰 *शुल्क:* ${booking.estimatedFee}\n📅 *तारीख:* ${booking.date}\n\nआपका टोकन सफलतापूर्वक बुक कर लिया गया है।`
+      : `💬 *Digital & Jan Seva Kendra - Token Slip*\n\n🎫 *Token No:* \`${booking.tokenNumber}\`\n📌 *Ref ID:* ${booking.referenceId}\n👤 *Applicant:* ${booking.applicantName}\n📱 *Mobile:* +91 ${booking.mobileNumber}\n📍 *District:* ${booking.cityOrDistrict}\n🛠 *Service:* ${booking.serviceTitle}\n💰 *Fee:* ${booking.estimatedFee}\n📅 *Date:* ${booking.date}\n\nToken booked successfully.`;
+
+    const targetPhone = booking.mobileNumber.length === 10 ? `91${booking.mobileNumber}` : booking.mobileNumber;
+    window.open(`https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(summary)}`, '_blank');
   };
 
   return (
@@ -408,6 +421,78 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
                   {copiedToken ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
                   <span>{copiedToken ? (isHi ? 'कॉपी हो गया!' : 'Copied!') : (isHi ? 'टोकन कॉपी करें' : 'Copy Slip')}</span>
                 </button>
+              </div>
+
+              {/* Direct WhatsApp Share Button */}
+              <div>
+                <button
+                  onClick={handleWhatsAppShare}
+                  className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
+                >
+                  <MessageCircle className="w-4 h-4 text-white" />
+                  <span>{isHi ? 'WhatsApp पर टोकन डिटेल्स भेजें' : 'Send Token Details on WhatsApp'}</span>
+                </button>
+              </div>
+
+              {/* Payment / UPI QR Code Section */}
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 via-white to-amber-50 border border-emerald-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 rounded-xl bg-emerald-600 text-white shadow-2xs">
+                      <CreditCard className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-xs sm:text-sm">
+                        {isHi ? 'ऑनलाइन शुल्क भुगतान (UPI / QR Code)' : 'Fee Payment & UPI QR'}
+                      </h4>
+                      <p className="text-[11px] text-slate-500">
+                        {isHi ? `शुल्क राशि: ${booking.estimatedFee}` : `Fee Amount: ${booking.estimatedFee}`}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowPaymentQR(!showPaymentQR)}
+                    className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors cursor-pointer shadow-2xs flex items-center gap-1"
+                  >
+                    <QrCode className="w-3.5 h-3.5" />
+                    <span>{showPaymentQR ? (isHi ? 'QR छिपाएं' : 'Hide QR') : (isHi ? 'QR कोड देखें' : 'View QR Code')}</span>
+                  </button>
+                </div>
+
+                {showPaymentQR && (
+                  <div className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm space-y-3 text-center animate-in fade-in duration-200">
+                    <div className="w-36 h-36 mx-auto bg-slate-900 rounded-xl p-3 flex flex-col items-center justify-center text-white border-4 border-emerald-500 shadow-sm">
+                      <QrCode className="w-20 h-20 text-amber-400" />
+                      <span className="text-[9px] font-mono tracking-widest text-emerald-300 mt-1">SCAN & PAY UPI</span>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-bold text-slate-800">
+                        {isHi ? 'UPI ID: digitalseva.upi@paytm' : 'UPI ID: digitalseva.upi@paytm'}
+                      </p>
+                      <p className="text-[11px] text-slate-500">
+                        {isHi ? 'Google Pay, PhonePay, Paytm या किसी भी UPI ऐप से स्कैन करके भुगतान करें।' : 'Scan via GPay, PhonePe, Paytm or any UPI app.'}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-100 flex items-center justify-center gap-2">
+                      {paymentReceived ? (
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                          <span>{isHi ? 'भुगतान प्राप्त हुआ (Payment Received Verified)' : 'Payment Received Verified'}</span>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setPaymentReceived(true)}
+                          className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors cursor-pointer"
+                        >
+                          {isHi ? '✓ भुगतान प्राप्त दर्ज करें (Mark Paid)' : '✓ Mark Payment Received'}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Bottom navigation */}
