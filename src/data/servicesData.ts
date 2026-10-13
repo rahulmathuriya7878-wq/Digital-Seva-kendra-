@@ -11,9 +11,9 @@ export const SERVICES_DATA: ServiceItem[] = [
     shortDescEn: 'Latest central & state government recruitments (SSC, UPSC, Railway, Police, Defence) admit cards and results.',
     departmentHi: 'कर्मचारी चयन आयोग व राज्य भर्ती बोर्ड (Recruitment Commissions)',
     departmentEn: 'SSC, UPSC, State Police & Service Selection Boards',
-    officialUrl: 'https://ssc.gov.in/',
-    feeHi: 'विज्ञापन अनुसार (प्रायः ₹0 से ₹100 आरक्षित/सामान्य)',
-    feeEn: 'As per notification (usually ₹0 to ₹100)',
+    officialUrl: 'https://sarkariresult12.vercel.app/',
+    feeHi: 'सरकारी फीस + ₹100 सेवा शुल्क (Official Exam Fee + ₹100 Service Charge)',
+    feeEn: 'Official Exam Fee + ₹100 Service Charge',
     processingTimeHi: 'विज्ञप्ति समय सारिणी अनुसार',
     processingTimeEn: 'As per exam calendar',
     requiredDocsHi: ['10वीं / 12वीं / स्नातक अंकतालिका', 'पासपोर्ट साइज नवीनतम फोटो (सफेद पृष्ठभूमि, 20KB-50KB)', 'साफ हस्ताक्षर (10KB-20KB)', 'जाति व ईडब्ल्यूएस प्रमाण पत्र (यदि लागू हो)'],
@@ -35,7 +35,71 @@ export const SERVICES_DATA: ServiceItem[] = [
     badgeEn: 'Employment',
     searchKeywords: ['sarkari', 'sarkari naukri', 'naukari', 'nokri', 'job', 'sarkari result', 'result', 'admit card', 'ssc', 'railway', 'police', 'bharti', 'vacancy', 'police bharti', 'recruitment', 'सरकारी नौकरी', 'रिजल्ट', 'भर्ती', 'रोजगार', 'सवेरा', 'नौकरी']
   },
-  // 2. Identity & Card Services
+  // Requested Top Order: PF, Scholarship, Aadhaar, PAN
+  {
+    id: 'epf-pf-services',
+    titleHi: 'PF / EPFO सेवाएं (UAN Balance & Advance Claim)',
+    titleEn: 'PF / EPFO Services (UAN, Balance & Withdrawal)',
+    category: 'pf-tax',
+    shortDescHi: 'कर्मचारी भविष्य निधि संगठन (EPFO) पोर्टल द्वारा पीएफ बैलेंस चेक, यूएएन एक्टिवेशन, पीएफ एडवांस निकासी व ट्रांसफर।',
+    shortDescEn: 'Provident Fund (EPFO) services including UAN activation, PF balance check, advance claim & transfer.',
+    departmentHi: 'कर्मचारी भविष्य निधि संगठन (EPFO / Ministry of Labour)',
+    departmentEn: 'Employees Provident Fund Organisation (EPFO)',
+    officialUrl: 'https://unifiedportal-mem.epfindia.gov.in/memberinterface/',
+    feeHi: 'सेवा शुल्क ₹30 - ₹50',
+    feeEn: 'Service Fee ₹30 - ₹50',
+    processingTimeHi: '1 से 3 कार्य दिवस',
+    processingTimeEn: '1 to 3 Working Days',
+    requiredDocsHi: ['UAN नंबर व पासवर्ड', 'आधार कार्ड (मोबाइल नंबर लिंक्ड)', 'बैंक पासबुक / चेक (KYC हेतु)'],
+    requiredDocsEn: ['UAN & Password', 'Aadhaar card (linked with mobile)', 'Bank Passbook / Cheque for KYC'],
+    stepsHi: [
+      'EPFO मेंबर पोर्टल पर UAN व पासवर्ड से लॉगिन करें।',
+      'ऑनलाइन सर्विस में जाकर क्लेम (Form 31, 19, 10C) भरें।',
+      'आधार ओटीपी सत्यापित करके एडवांस या फुल सेटलमेंट सबमिट करें।'
+    ],
+    stepsEn: [
+      'Login to EPFO member portal with UAN and password.',
+      'Go to Online Services and select Form for advance or withdrawal.',
+      'Authenticate via Aadhaar OTP and submit claim.'
+    ],
+    iconName: 'ShieldCheck',
+    badgeHi: 'पीएफ सेवा',
+    badgeEn: 'PF Services',
+    searchKeywords: ['pf', 'epf', 'epfo', 'uan', 'pf balance', 'pf withdrawal', 'pf claim', 'प्रोविडेंट फंड', 'पीएपफ', 'ईपीएफ', 'यूएएन', 'पीएफ बैलेंस']
+  },
+  {
+    id: 'scholarship-portal',
+    titleHi: 'छात्रवृत्ति आवेदन (Pre & Post Matric Scholarship)',
+    titleEn: 'Scholarship Application (State & NSP)',
+    category: 'welfare',
+    shortDescHi: 'कक्षा 9वीं से लेकर उच्च शिक्षा (BA, BSc, BTech, ITI, Diploma) हेतु सरकारी छात्रवृत्ति व शुल्क प्रतिपूर्ति।',
+    shortDescEn: 'Pre-matric and post-matric government scholarships and tuition fee reimbursement portal.',
+    departmentHi: 'समाज कल्याण विभाग (Social Welfare / National Scholarship Portal)',
+    departmentEn: 'National Scholarship Portal (NSP / State Portals)',
+    officialUrl: 'https://scholarships.gov.in/',
+    feeHi: '100₹',
+    feeEn: '100₹',
+    processingTimeHi: 'सत्र अनुसार (संस्थान सत्यापन के बाद)',
+    processingTimeEn: 'Session-based upon institute verification',
+    requiredDocsHi: ['पिछली कक्षा की मार्कशीट', 'आय प्रमाण पत्र (सक्षम अधिकारी द्वारा)', 'जाति प्रमाण पत्र (यदि लागू हो)', 'फीस रसीद व संस्था नामांकन संख्या'],
+    requiredDocsEn: ['Previous qualifying marksheets', 'Valid Income certificate', 'Caste certificate (if applicable)', 'Fee receipt & Institute Roll/Registration Number'],
+    stepsHi: [
+      'पोर्टल पर Fresh या Renewal रजिस्ट्रेशन करें।',
+      'संस्थान का नाम, पाठ्यक्रम, वर्ष और फीस विवरण दर्ज करें।',
+      'आय, जाति और अंकपत्र विवरण भरकर डिजिटल लॉकर से सत्यापित करें।',
+      'आवेदन का फाइनल प्रिंट लेकर सभी कागजातों सहित अपने कॉलेज/स्कूल में जमा करें।'
+    ],
+    stepsEn: [
+      'Register as Fresh or Renewal candidate on scholarship portal.',
+      'Enter college name, course, current academic year, and tuition fee.',
+      'Input income, caste certificates and link via DigiLocker.',
+      'Take final printout and submit hard copy with attachments to college.'
+    ],
+    iconName: 'GraduationCap',
+    badgeHi: 'विद्यार्थी सेवा',
+    badgeEn: 'Students',
+    searchKeywords: ['scholarship', 'chatravritti', 'shiksha', 'nsp', 'student', 'wazifa', 'fee reimbursement', 'छात्रवृत्ति', 'वजीफा', 'स्कॉलरशिप', 'छात्र']
+  },
   {
     id: 'aadhaar-download',
     titleHi: 'आधार कार्ड डाउनलोड व पीवीसी कार्ड',
@@ -102,39 +166,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     badgeEn: 'Essential',
     searchKeywords: ['pan', 'pan card', 'pancard', 'nsdl', 'uti', 'form 49a', 'e-pan', 'pan aadhar link', 'pan apply', 'पैन कार्ड', 'पैन', 'नया पैन कार्ड', 'आयकर कार्ड']
   },
-  {
-    id: 'ayushman-card',
-    titleHi: 'आयुष्मान भारत कार्ड (₹5 लाख मुफ्त इलाज)',
-    titleEn: 'Ayushman Bharat Card (PM-JAY ₹5 Lakh Free Treatment)',
-    category: 'identity',
-    shortDescHi: 'पात्रता सूची में नाम जांचें, ई-केवाईसी पूरा करें और अस्पताल में ₹5 लाख तक कैशलेस इलाज कार्ड बनाएं।',
-    shortDescEn: 'Check PM-JAY beneficiary list, complete mobile e-KYC and download Ayushman Golden Card.',
-    departmentHi: 'राष्ट्रीय स्वास्थ्य प्राधिकरण (National Health Authority)',
-    departmentEn: 'National Health Authority (NHA)',
-    officialUrl: 'https://beneficiary.nha.gov.in/',
-    feeHi: '100₹',
-    feeEn: '100₹',
-    processingTimeHi: 'ई-केवाईसी के 24 घंटे के अंदर',
-    processingTimeEn: 'Within 24 Hours of e-KYC',
-    requiredDocsHi: ['राशन कार्ड या परिवार पहचान पत्र (Family ID)', 'आधार कार्ड', 'आधार से जुड़ा सक्रिय मोबाइल नंबर'],
-    requiredDocsEn: ['Ration Card or Family ID', 'Aadhaar Card', 'Mobile linked with Aadhaar for OTP'],
-    stepsHi: [
-      'beneficiary.nha.gov.in पोर्टल पर अपने मोबाइल नंबर से लॉगिन करें।',
-      'राज्य, योजना (PMJAY) तथा राशन कार्ड नंबर डालकर खोजें।',
-      'परिवार के सदस्यों के सामने "e-KYC" पर क्लिक करें।',
-      'लाइव फोटो कैप्चर करें और वेरिफाई होते ही कार्ड डाउनलोड करें।'
-    ],
-    stepsEn: [
-      'Login with mobile number on beneficiary.nha.gov.in.',
-      'Select State, Scheme (PMJAY), and search using Ration Card Number.',
-      'Click e-KYC next to the eligible family member.',
-      'Capture photo verification and download the Ayushman Card once approved.'
-    ],
-    iconName: 'ShieldCheck',
-    badgeHi: 'स्वास्थ्य सुरक्षा',
-    badgeEn: 'Health Scheme',
-    searchKeywords: ['ayushman', 'ayushman card', 'pmjay', 'golden card', '5 lakh', 'health card', 'upchar', 'ilaj', 'आयुष्मान कार्ड', 'आयुष्मान भारत', 'गोल्डन कार्ड', 'मुफ्त इलाज', 'इलाज']
-  },
+  // Other Services
   {
     id: 'voter-id-card',
     titleHi: 'वोटर आईडी कार्ड (मतदाता पहचान पत्र)',
@@ -230,8 +262,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     iconName: 'Truck',
     searchKeywords: ['driving licence', 'driving license', 'dl', 'learning licence', 'learner', 'parivahan', 'sarathi', 'rto', 'vahan', 'gadi licence', 'ड्राइविंग लाइसेंस', 'डीएल', 'लर्निंग लाइसेंस', 'सारथी', 'परिवहन']
   },
-
-  // 2. Certificates & Revenue Services
   {
     id: 'caste-certificate',
     titleHi: 'जाति प्रमाण पत्र (Caste Certificate)',
@@ -298,39 +328,37 @@ export const SERVICES_DATA: ServiceItem[] = [
   },
   {
     id: 'bhulekh-land-records',
-    titleHi: 'भूलेख खसरा-खतौनी व भू-नक्शा (Land Records)',
-    titleEn: 'Bhulekh Khasra-Khatauni & Land Maps',
+    titleHi: 'भूलेख खसरा-खतौनी, अपना खाता व जमाबंदी (UP & Rajasthan Bhulekh)',
+    titleEn: 'Bhulekh Khasra-Khatauni, Apna Khata & Land Maps',
     category: 'certificates',
-    shortDescHi: 'जमीन की खतौनी, खातेदार का नाम, गाटा संख्या, भू-नक्शा व अंश निर्धारण नकल ऑनलाइन देखें व प्रिंट करें।',
-    shortDescEn: 'View and download official RoR (Record of Rights), Khasra-Khatauni, ownership details and plot map.',
-    departmentHi: 'राजस्व परिषद (Board of Revenue)',
-    departmentEn: 'Board of Revenue Land Records Directorate',
-    officialUrl: 'https://upbhulekh.gov.in/',
+    shortDescHi: 'उत्तर प्रदेश (UP Bhulekh) व राजस्थान (अपना खाता / ई-धरती Jamabandi) की जमीन की खतौनी, खसरा नंबर व भू-नक्शा ऑनलाइन देखें।',
+    shortDescEn: 'View and download official RoR (Record of Rights), Khasra-Khatauni, Apna Khata Jamabandi for UP & Rajasthan.',
+    departmentHi: 'राजस्व विभाग (Board of Revenue - UP & Rajasthan Directorate)',
+    departmentEn: 'Board of Revenue Land Records Directorate (UP & Rajasthan)',
+    officialUrl: 'https://apnakhata.raj.nic.in/',
     feeHi: '',
     feeEn: '',
     processingTimeHi: 'तुरंत (Real-time Instant)',
     processingTimeEn: 'Instant (Real-time)',
-    requiredDocsHi: ['जिला, तहसील एवं ग्राम का नाम', 'खाता संख्या, खसरा (गाटा) संख्या या खातेदार का नाम'],
-    requiredDocsEn: ['District, Tehsil and Village Name', 'Khata Number, Khasra/Gata Number or Landholder Name'],
+    requiredDocsHi: ['जिला, तहसील व गांव/ग्राम का नाम', 'खाता संख्या, खसरा (गाटा) संख्या या खातेदार का नाम'],
+    requiredDocsEn: ['District, Tehsil and Village Name', 'Khata Number, Khasra Number or Landholder Name'],
     stepsHi: [
-      'राज्य भूलेख पोर्टल खोलें।',
-      'अपना जनपद, तहसील और ग्राम चुनें।',
-      'खातेदार के नाम, खसरा संख्या या खाता संख्या द्वारा खोजें।',
-      'कैप्चा दर्ज करके तुरंत डिजिटल खतौनी नकल देखें और प्रिंट निकालें।'
+      'राजस्थान के लिए "अपना खाता (Apna Khata)" पोर्टल या यूपी के लिए "UP Bhulekh" चुनें।',
+      'अपना जिला, तहसील, और गांव (Village) चुनें।',
+      'खातेदार के नाम, खसरा नंबर या खाता संख्या दर्ज करें।',
+      'डिजिटल खतौनी / जमाबंदी नकल ऑनलाइन देखें और प्रिंट करें।'
     ],
     stepsEn: [
-      'Open state Bhulekh portal.',
-      'Select District, Tehsil, and Village.',
+      'Select Rajasthan Apna Khata or UP Bhulekh portal.',
+      'Choose your District, Tehsil, and Village.',
       'Search by Landowner Name, Plot/Khasra Number or Khata Number.',
-      'Submit captcha to view and print official RoR instantly.'
+      'View and print official Jamabandi or Khatauni instantly.'
     ],
     iconName: 'Map',
     badgeHi: 'जमीन दस्तावेज',
     badgeEn: 'Land Record',
-    searchKeywords: ['bhulekh', 'bhoolekh', 'khasra', 'khatauni', 'khatoni', 'khasara', 'gata', 'land record', 'zameen', 'bhu naksha', 'naksha', 'ror', 'भूलेख', 'खसरा', 'खतौनी', 'जमीन', 'भू नक्शा', 'खसरा खतौनी']
+    searchKeywords: ['bhulekh', 'bhoolekh', 'khasra', 'khatauni', 'apna khata', 'jamabandi', 'rajasthan bhulekh', 'edharti', 'gata', 'land record', 'zameen', 'bhu naksha', 'naksha', 'भूलेख', 'खसरा', 'खतौनी', 'अपना खाता', 'जमाबंदी', 'राजस्थान भूलेख', 'ई धरती', 'जमीन']
   },
-
-  // 3. Welfare & DBT Schemes
   {
     id: 'pm-kisan-status',
     titleHi: 'पीएम किसान सम्मान निधि (किस्त व ई-केवाईसी)',
@@ -396,105 +424,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     searchKeywords: ['eshram', 'e shram', 'shram card', 'uan card', 'majdoor', 'labour card', 'ई-श्रम कार्ड', 'ई श्रम', 'श्रम कार्ड', 'मजदूर कार्ड', 'श्रमिक']
   },
   {
-    id: 'pm-awas-yojana',
-    titleHi: 'प्रधानमंत्री आवास योजना (PMAY ग्रामीण व शहरी सूची)',
-    titleEn: 'PM Awas Yojana (PMAY Rural & Urban List)',
-    category: 'welfare',
-    shortDescHi: 'पक्के मकान हेतु ₹1.20 लाख से ₹2.50 लाख की सरकारी सब्सिडी लाभार्थी सूची व आवेदन स्थिति जांचें।',
-    shortDescEn: 'Check beneficiary sanction list for rural and urban pucca housing financial assistance scheme.',
-    departmentHi: 'ग्रामीण विकास / आवास एवं शहरी कार्य मंत्रालय',
-    departmentEn: 'Ministry of Housing and Urban Affairs / MoRD',
-    officialUrl: 'https://pmayg.nic.in/',
-    feeHi: '100₹',
-    feeEn: '100₹',
-    processingTimeHi: 'सर्वेक्षण व सत्यापन अनुसार',
-    processingTimeEn: 'As per ward/gram panchayat survey',
-    requiredDocsHi: ['आधार कार्ड', 'बैंक खाता पासबुक', 'जॉब कार्ड (मनरेगा)', 'कच्चे मकान की जियो-टैग फोटो'],
-    requiredDocsEn: ['Aadhaar Card', 'Bank passbook', 'MGNREGA Job Card', 'Geo-tagged photo of existing shelter'],
-    stepsHi: [
-      'PMAYG या PMAY-U आधिकारिक वेबसाइट खोलें।',
-      'Stakeholders मेनू में "IAY/PMAYG Beneficiary" विकल्प चुनें।',
-      'रजिस्ट्रेशन नंबर या राज्य, जिला, ब्लॉक और ग्राम पंचायत से नाम खोजें।',
-      'स्वीकृत धनराशि, किस्त भुगतान व मकान निर्माण प्रगति देखें।'
-    ],
-    stepsEn: [
-      'Open PMAY official portal (pmayg.nic.in).',
-      'Navigate to Stakeholders -> IAY/PMAYG Beneficiary.',
-      'Search using Registration number or state/district/block/village filters.',
-      'View sanction order, installment release status, and stage photos.'
-    ],
-    iconName: 'Building',
-    searchKeywords: ['pm awas', 'awas yojana', 'pmay', 'makan', 'ghar', 'housing', 'pradhan mantri awas', 'प्रधानमंत्री आवास योजना', 'आवास सूची', 'मकान', 'आवास']
-  },
-  {
-    id: 'scholarship-portal',
-    titleHi: 'छात्रवृत्ति आवेदन (Pre & Post Matric Scholarship)',
-    titleEn: 'Scholarship Application (State & NSP)',
-    category: 'welfare',
-    shortDescHi: 'कक्षा 9वीं से लेकर उच्च शिक्षा (BA, BSc, BTech, ITI, Diploma) हेतु सरकारी छात्रवृत्ति व शुल्क प्रतिपूर्ति।',
-    shortDescEn: 'Pre-matric and post-matric government scholarships and tuition fee reimbursement portal.',
-    departmentHi: 'समाज कल्याण विभाग (Social Welfare / National Scholarship Portal)',
-    departmentEn: 'National Scholarship Portal (NSP / State Portals)',
-    officialUrl: 'https://scholarships.gov.in/',
-    feeHi: '100₹',
-    feeEn: '100₹',
-    processingTimeHi: 'सत्र अनुसार (संस्थान सत्यापन के बाद)',
-    processingTimeEn: 'Session-based upon institute verification',
-    requiredDocsHi: ['पिछली कक्षा की मार्कशीट', 'आय प्रमाण पत्र (सक्षम अधिकारी द्वारा)', 'जाति प्रमाण पत्र (यदि लागू हो)', 'फीस रसीद व संस्था नामांकन संख्या'],
-    requiredDocsEn: ['Previous qualifying marksheets', 'Valid Income certificate', 'Caste certificate (if applicable)', 'Fee receipt & Institute Roll/Registration Number'],
-    stepsHi: [
-      'पोर्टल पर Fresh या Renewal रजिस्ट्रेशन करें।',
-      'संस्थान का नाम, पाठ्यक्रम, वर्ष और फीस विवरण दर्ज करें।',
-      'आय, जाति और अंकपत्र विवरण भरकर डिजिटल लॉकर से सत्यापित करें।',
-      'आवेदन का फाइनल प्रिंट लेकर सभी कागजातों सहित अपने कॉलेज/स्कूल में जमा करें।'
-    ],
-    stepsEn: [
-      'Register as Fresh or Renewal candidate on scholarship portal.',
-      'Enter college name, course, current academic year, and tuition fee.',
-      'Input income, caste certificates and link via DigiLocker.',
-      'Take final printout and submit hard copy with attachments to college.'
-    ],
-    iconName: 'GraduationCap',
-    badgeHi: 'विद्यार्थी सेवा',
-    badgeEn: 'Students',
-    searchKeywords: ['scholarship', 'chatravritti', 'shiksha', 'nsp', 'student', 'wazifa', 'fee reimbursement', 'छात्रवृत्ति', 'वजीफा', 'स्कॉलरशिप', 'छात्र']
-  },
-
-  // 4. Bills & Utility Services
-  {
-    id: 'electricity-bill',
-    titleHi: 'बिजली बिल देखें व भुगतान (Electricity Bill Pay)',
-    titleEn: 'Electricity Bill Inquiry & Payment',
-    category: 'bills',
-    shortDescHi: 'मीटर / उपभोक्ता संख्या (CA No.) डालकर घरेलू व वाणिज्यिक बिजली बिल देखें और तुरंत रसीद प्राप्त करें।',
-    shortDescEn: 'Check outstanding electricity bill using Consumer Account Number and generate instant receipt.',
-    departmentHi: 'राज्य विद्युत वितरण निगम (Discoms / Power Corporation)',
-    departmentEn: 'State Power Distribution Companies (UPPCL / Tata Power / BSES / DHBVN / etc.)',
-    officialUrl: 'https://www.uppclonline.com/',
-    feeHi: 'कोई अतिरिक्त शुल्क नहीं (Zero Convenience Fee on UPI)',
-    feeEn: 'No extra fee on official portal',
-    processingTimeHi: 'तुरंत (Instant Update)',
-    processingTimeEn: 'Real-time Instant',
-    requiredDocsHi: ['10 या 12 अंकों का उपभोक्ता खाता संख्या (Account / CA / K Number)', 'पुराना बिजली बिल (सत्यापन हेतु)'],
-    requiredDocsEn: ['10 or 12-digit Consumer Account ID (CA / K Number)', 'Previous electricity bill slip for reference'],
-    stepsHi: [
-      'अपनी राज्य विद्युत कंपनी (जैसे UPPCL, PSPCL, JVVNL, BSES) का चयन करें।',
-      'बिल पर दर्ज 10 अंकों का खाता संख्या (Account Number) दर्ज करें।',
-      'उपभोक्ता का नाम, देय तिथि और बकाया राशि स्क्रीन पर दिखाई देगी।',
-      'ऑनलाइन भुगतान कर आधिकारिक ई-रसीद डाउनलोड व प्रिंट करें।'
-    ],
-    stepsEn: [
-      'Select your electricity distribution company.',
-      'Enter consumer account number from your bill.',
-      'Review consumer name, due date, and amount due.',
-      'Pay via UPI/NetBanking and download instant paid receipt.'
-    ],
-    iconName: 'Zap',
-    badgeHi: 'यूटिलिटी',
-    badgeEn: 'Utility',
-    searchKeywords: ['electricity bill', 'bijli bill', 'bijli', 'light bill', 'bill payment', 'uppcl', 'power', 'बिजली बिल', 'बिजली', 'बिल भुगतान', 'लाइट बिल']
-  },
-  {
     id: 'lpg-gas-booking',
     titleHi: 'एलपीजी गैस सिलेंडर बुकिंग व सब्सिडी (LPG Seva)',
     titleEn: 'LPG Gas Cylinder Booking & Subsidy Check',
@@ -556,8 +485,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     iconName: 'Car',
     searchKeywords: ['fastag', 'fast tag', 'toll', 'recharge', 'nhai', 'toll plaza', 'फास्टैग', 'टोल रिचार्ज', 'फास्टैग रिचार्ज']
   },
-
-  // 5. Jobs & Sarkari Results
   {
     id: 'resume-biodata-maker',
     titleHi: 'बायोडाटा व रिज्यूमे मेकर (Job Resume Maker)',
@@ -619,6 +546,37 @@ export const SERVICES_DATA: ServiceItem[] = [
     badgeHi: 'नागरिक सहायता',
     badgeEn: 'Support',
     searchKeywords: ['other', 'other services', 'aanya', 'anya', 'anya seva', 'custom service', 'online form', 'help', 'अन्य', 'अन्य सेवा', 'अन्य सेवाएं', 'सहायता', 'ऑनलाइन कार्य']
+  },
+  {
+    id: 'tds-tax-services',
+    titleHi: 'TDS / आयकर रिटर्न व फॉर्म 16 (Tax Services)',
+    titleEn: 'TDS / Income Tax Return & Form 16',
+    category: 'pf-tax',
+    shortDescHi: 'टैक्स डिडक्शन (TDS) विवरण, फॉर्म 16 डाउनलोड, आईटीआर (ITR) फाइलिंग व टैक्स रिफंड स्टेटस चेक।',
+    shortDescEn: 'TDS certificate download, Form 16, Income Tax Return (ITR) filing and tax refund status.',
+    departmentHi: 'आयकर विभाग भारत सरकार (Income Tax Department)',
+    departmentEn: 'Income Tax Department, Government of India',
+    officialUrl: 'https://www.incometax.gov.in/',
+    feeHi: 'सेवा शुल्क ₹100 - ₹300',
+    feeEn: 'Service Fee ₹100 - ₹300',
+    processingTimeHi: '2 से 4 कार्य दिवस',
+    processingTimeEn: '2 to 4 Working Days',
+    requiredDocsHi: ['पैन कार्ड (PAN Card)', 'फॉर्म 16 / सैलरी स्लिप', 'बैंक स्टेटमेंट व TDS विवरण (Form 26AS)'],
+    requiredDocsEn: ['PAN Card', 'Form 16 / Salary slips', 'Bank Statement & Form 26AS TDS details'],
+    stepsHi: [
+      'आयकर ई-फाइलिंग पोर्टल पर लॉगिन करें।',
+      'Form 26AS व Annual Information Statement (AIS) जांचें।',
+      'आईटीआर (ITR-1 / ITR-4) भरकर सबमिट करें।'
+    ],
+    stepsEn: [
+      'Login to Income Tax e-filing portal.',
+      'Verify Form 26AS and AIS statement.',
+      'Fill and submit ITR return.'
+    ],
+    iconName: 'Banknote',
+    badgeHi: 'टैक्स सेवा',
+    badgeEn: 'Tax Services',
+    searchKeywords: ['tds', 'tax', 'income tax', 'itr', 'form 16', 'form 26as', 'pan tax', 'टीडीएस', 'टैक्स', 'आयकर', 'आईटीआर', 'फॉर्म 16']
   }
 ];
 

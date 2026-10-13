@@ -110,6 +110,14 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
     setBooking(newBooking);
     setIsSubmitting(false);
 
+    // Automatically open WhatsApp with token details so user receives it on their WhatsApp number
+    const targetPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+    const summary = isHi
+      ? `💬 *डिजिटल एवं जन सेवा केंद्र - टोकन पर्ची*\n\n🎫 *टोकन नंबर:* \`${tokenNum}\`\n📌 *संदर्भ आईडी:* ${refNum}\n👤 *आवेदक:* ${name.trim()}\n📱 *मोबाइल:* +91 ${cleanPhone}\n📍 *जिला:* ${district.trim() || 'स्थानीय जिला'}\n🛠 *सेवा:* ${finalServiceTitle}\n💰 *शुल्क:* ${isHi ? currentService.feeHi : currentService.feeEn}\n📅 *तारीख:* ${todayFormatted}\n\nआपका टोकन सफलतापूर्वक बुक कर लिया गया है।`
+      : `💬 *Digital & Jan Seva Kendra - Token Slip*\n\n🎫 *Token No:* \`${tokenNum}\`\n📌 *Ref ID:* ${refNum}\n👤 *Applicant:* ${name.trim()}\n📱 *Mobile:* +91 ${cleanPhone}\n📍 *District:* ${district.trim() || 'Local District'}\n🛠 *Service:* ${finalServiceTitle}\n💰 *Fee:* ${isHi ? currentService.feeHi : currentService.feeEn}\n📅 *Date:* ${todayFormatted}\n\nToken booked successfully.`;
+
+    window.open(`https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(summary)}`, '_blank');
+
     // Save to Firestore & local storage asynchronously in background
     saveTokenBooking(newBooking).catch(err => {
       console.warn('Background sync note:', err);
@@ -430,7 +438,7 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
                   className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
                 >
                   <MessageCircle className="w-4 h-4 text-white" />
-                  <span>{isHi ? 'WhatsApp पर टोकन डिटेल्स भेजें' : 'Send Token Details on WhatsApp'}</span>
+                  <span>{isHi ? '💬 WhatsApp पर शेयर करें (Share on WhatsApp)' : '💬 Share on WhatsApp'}</span>
                 </button>
               </div>
 

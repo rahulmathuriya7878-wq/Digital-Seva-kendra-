@@ -40,6 +40,17 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
                 ? 'भारत के नागरिकों हेतु सभी ऑनलाइन इंटरनेट सेवाएं, प्रमाण पत्र, सरकारी योजनाएं व फॉर्म भरने का आधिकारिक सुविधा मंच।'
                 : 'Unified single-window digital access point for Indian citizen services, certificates, and utility billings.'}
             </p>
+            <div className="pt-2">
+              <a
+                href="https://wa.me/918764107756"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 hover:text-emerald-300 font-bold text-xs transition-colors"
+              >
+                <span>💬</span>
+                <span>{isHi ? 'WhatsApp हेल्पलाइन: 87641 07756' : 'WhatsApp Helpline: 87641 07756'}</span>
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}

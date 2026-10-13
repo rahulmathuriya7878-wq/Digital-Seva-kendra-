@@ -6,7 +6,8 @@ export type ServiceCategory =
   | 'certificates'
   | 'welfare'
   | 'bills'
-  | 'jobs';
+  | 'jobs'
+  | 'pf-tax';
 
 export interface ServiceItem {
   id: string;

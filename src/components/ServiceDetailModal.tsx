@@ -26,6 +26,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 }) => {
   const isHi = language === 'hi';
   const [checkedDocs, setCheckedDocs] = useState<Record<number, boolean>>({});
+  const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>({});
 
   const toggleDoc = (index: number) => {
     setCheckedDocs((prev) => ({
@@ -34,8 +35,21 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
     }));
   };
 
+  const toggleStep = (index: number) => {
+    setCheckedSteps((prev) => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
   const docs = isHi ? service.requiredDocsHi : service.requiredDocsEn;
   const steps = isHi ? service.stepsHi : service.stepsEn;
+
+  const completedDocsCount = Object.values(checkedDocs).filter(Boolean).length;
+  const completedStepsCount = Object.values(checkedSteps).filter(Boolean).length;
+  
+  const docsProgress = Math.round((completedDocsCount / (docs.length || 1)) * 100);
+  const stepsProgress = Math.round((completedStepsCount / (steps.length || 1)) * 100);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
@@ -93,14 +107,30 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             </p>
           </div>
 
+          {/* Dynamic Progress Summary Banner */}
+          <div className="p-4 rounded-xl bg-gradient-to-r from-amber-50 via-emerald-50 to-blue-50 border border-amber-200/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="space-y-1 w-full">
+              <div className="flex items-center justify-between text-xs font-bold text-slate-800">
+                <span>{isHi ? '📊 आवेदन तैयारी स्थिति (Application Readiness):' : '📊 Application Readiness:'}</span>
+                <span className="text-emerald-800 font-mono">{Math.round((docsProgress + stepsProgress) / 2)}%</span>
+              </div>
+              <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-emerald-600 transition-all duration-300 rounded-full"
+                  style={{ width: `${Math.round((docsProgress + stepsProgress) / 2)}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
           {/* Interactive Document Checklist */}
           <div>
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
                 {isHi ? 'आवश्यक दस्तावेज (दस्तावेज चेकलिस्ट):' : 'Mandatory Document Checklist:'}
               </h3>
-              <span className="text-[11px] text-slate-500">
-                {isHi ? 'तैयार कागजातों पर टिक करें' : 'Tick documents you have'}
+              <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                {completedDocsCount} / {docs.length} {isHi ? 'तैयार' : 'ready'}
               </span>
             </div>
 
@@ -113,7 +143,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                     onClick={() => toggleDoc(idx)}
                     className={`flex items-start gap-2.5 p-3 rounded-lg border cursor-pointer transition-colors ${
                       isChecked
-                        ? 'bg-emerald-50/60 border-emerald-300 text-emerald-900'
+                        ? 'bg-emerald-50/70 border-emerald-300 text-emerald-950 shadow-2xs'
                         : 'bg-white border-slate-200 hover:border-slate-300 text-slate-700'
                     }`}
                   >
@@ -129,22 +159,51 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             </div>
           </div>
 
-          {/* Step-by-Step Guidance */}
+          {/* Interactive Step-by-Step Guidance (Steps to Apply) */}
           <div>
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2.5">
-              {isHi ? 'ऑनलाइन आवेदन की चरणबद्ध प्रक्रिया (STEPS TO APPLY):' : 'Step-by-Step Application Procedure:'}
-            </h3>
+            <div className="flex items-center justify-between mb-2.5">
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                {isHi ? 'ऑनलाइन आवेदन की चरणबद्ध प्रक्रिया (STEPS TO APPLY):' : 'Interactive Steps to Apply Procedure:'}
+              </h3>
+              <span className="text-[11px] font-semibold text-blue-800 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                {completedStepsCount} / {steps.length} {isHi ? 'पूर्ण' : 'completed'}
+              </span>
+            </div>
+
             <div className="space-y-2.5">
-              {steps.map((st, idx) => (
-                <div key={idx} className="flex items-start gap-3 p-2.5 rounded-lg bg-slate-50/80 border border-slate-100">
-                  <span className="w-5 h-5 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
-                    {idx + 1}
-                  </span>
-                  <p className="text-xs sm:text-sm text-slate-700 leading-normal">
-                    {st}
-                  </p>
-                </div>
-              ))}
+              {steps.map((st, idx) => {
+                const isStepCompleted = !!checkedSteps[idx];
+                return (
+                  <div 
+                    key={idx} 
+                    onClick={() => toggleStep(idx)}
+                    className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all ${
+                      isStepCompleted 
+                        ? 'bg-blue-50/70 border-blue-300 text-blue-950 shadow-2xs' 
+                        : 'bg-slate-50/80 border-slate-200 hover:border-slate-300 text-slate-700'
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      className={`w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                        isStepCompleted
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-slate-800 text-white'
+                      }`}
+                    >
+                      {isStepCompleted ? '✓' : (idx + 1)}
+                    </button>
+                    <div className="flex-1 min-w-0">
+                      <p className={`text-xs sm:text-sm leading-normal font-medium ${isStepCompleted ? 'line-through text-blue-900/80' : 'text-slate-800'}`}>
+                        {st}
+                      </p>
+                      <span className="text-[10px] text-slate-400 block mt-0.5">
+                        {isStepCompleted ? (isHi ? 'चरण पूर्ण (Completed)' : 'Step Completed') : (isHi ? 'पूर्ण करने के लिए क्लिक करें (Click to complete)' : 'Click to complete step')}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

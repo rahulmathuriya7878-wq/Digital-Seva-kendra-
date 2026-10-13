@@ -43,6 +43,7 @@ export const Hero: React.FC<HeroProps> = ({
     { id: 'jobs', labelHi: 'सरकारी नौकरी व रिजल्ट', labelEn: 'Sarkari Jobs & Results' },
     { id: 'identity', labelHi: 'आधार व पहचान कार्ड', labelEn: 'Aadhaar & Identity' },
     { id: 'certificates', labelHi: 'जाति, निवास व खतौनी', labelEn: 'Certificates & Land' },
+    { id: 'pf-tax', labelHi: 'PF व TDS / टैक्स सेवाएं', labelEn: 'PF & TDS / Tax Services' },
     { id: 'welfare', labelHi: 'पीएम किसान व सरकारी योजनाएं', labelEn: 'Welfare Schemes' },
     { id: 'bills', labelHi: 'बिजली बिल व यूटिलिटी', labelEn: 'Utility & Bills' }
   ];

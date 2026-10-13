@@ -105,7 +105,12 @@ export default function App() {
       cv: ['resume', 'biodata', 'सीवी'],
       dl: ['driving', 'licence', 'license', 'सारथी', 'डीएल'],
       anya: ['other', 'अन्य', 'aanya', 'other-services'],
-      aanya: ['other', 'अन्य', 'anya', 'other-services']
+      aanya: ['other', 'अन्य', 'anya', 'other-services'],
+      pf: ['epf', 'epfo', 'uan', 'पीएपफ', 'प्रोविडेंट फंड'],
+      epf: ['pf', 'epfo', 'uan', 'पीएपफ'],
+      uan: ['pf', 'epf', 'epfo', 'यूएएन'],
+      tds: ['tax', 'income tax', 'itr', 'form 16', 'टैक्स', 'टीडीएस', 'आयकर'],
+      tax: ['tds', 'income tax', 'itr', 'टैक्स', 'आयकर']
     };
 
     // Expand search terms with recognized synonyms
@@ -341,7 +346,7 @@ export default function App() {
 
           {/* Cards Grid */}
           {filteredServices.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredServices.map((service) => (
                 <ServiceCard
                   key={service.id}

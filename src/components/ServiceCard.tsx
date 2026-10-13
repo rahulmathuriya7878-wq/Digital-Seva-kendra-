@@ -77,7 +77,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-between bg-white rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all p-5">
+    <div className="flex flex-col justify-between bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all p-4 sm:p-6">
       <div>
         {/* Top Header: Unboxed metadata line with typographic separators */}
         <div className="flex items-center justify-between gap-2 text-xs text-slate-500 mb-3">
@@ -90,15 +90,15 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           </div>
 
           {(service.badgeHi || service.badgeEn) && (
-            <span className="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-sm">
+            <span className="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md">
               {isHi ? service.badgeHi : service.badgeEn}
             </span>
           )}
         </div>
 
         {/* Card Title & Icon */}
-        <div className="flex items-start gap-3 mb-2.5">
-          <div className="w-10 h-10 rounded-lg bg-amber-50/80 border border-amber-200/50 flex items-center justify-center shrink-0">
+        <div className="flex items-start gap-3 mb-3">
+          <div className="w-11 h-11 rounded-xl bg-amber-50/80 border border-amber-200/50 flex items-center justify-center shrink-0">
             {getIcon(service.iconName)}
           </div>
           <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug group-hover:text-amber-800 transition-colors">
@@ -107,23 +107,23 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         </div>
 
         {/* Short Description */}
-        <p className="text-sm text-slate-600 leading-relaxed mb-4">
+        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4">
           {isHi ? service.shortDescHi : service.shortDescEn}
         </p>
 
         {/* Unboxed Metadata: Fee & Processing time */}
-        <div className="space-y-1.5 py-3 border-t border-slate-100 text-xs text-slate-600">
+        <div className="space-y-2 py-3 border-t border-slate-100 text-xs text-slate-600">
           {(isHi ? service.feeHi : service.feeEn) ? (
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 font-medium">{isHi ? 'सेवा शुल्क:' : 'Service Fee:'}</span>
-              <span className="font-semibold text-slate-800 tabular-nums">
+              <span className="text-slate-500 font-medium">{isHi ? 'सेवा शुल्क:' : 'Service Fee:'}</span>
+              <span className="font-semibold text-slate-900 tabular-nums">
                 {isHi ? service.feeHi : service.feeEn}
               </span>
             </div>
           ) : null}
           <div className="flex items-center justify-between">
-            <span className="text-slate-400 font-medium">{isHi ? 'समय सीमा:' : 'Timeline:'}</span>
-            <span className="text-slate-700">
+            <span className="text-slate-500 font-medium">{isHi ? 'समय सीमा:' : 'Timeline:'}</span>
+            <span className="text-slate-800 font-medium">
               {isHi ? service.processingTimeHi : service.processingTimeEn}
             </span>
           </div>
@@ -131,13 +131,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       </div>
 
       {/* Action Buttons */}
-      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
         <button
           onClick={() => onSelectService(service)}
-          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors whitespace-nowrap"
+          className="flex-1 flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold rounded-xl bg-slate-900 text-white hover:bg-slate-800 active:scale-[0.99] transition-all cursor-pointer whitespace-nowrap shadow-xs"
         >
           <span>{isHi ? 'प्रक्रिया व आवेदन गाइड' : 'Steps & Guidelines'}</span>
-          <ChevronRight className="w-3.5 h-3.5" />
+          <ChevronRight className="w-4 h-4 text-amber-400" />
         </button>
 
         {service.officialUrl.startsWith('http') && (
@@ -146,7 +146,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             title={isHi ? 'सीधा सरकारी पोर्टल खोलें' : 'Open Official Govt Portal'}
-            className="p-2 text-slate-600 hover:text-amber-800 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors shrink-0"
+            className="p-3 text-slate-700 hover:text-amber-800 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors shrink-0 flex items-center justify-center min-w-[44px] min-h-[44px] cursor-pointer"
           >
             <ExternalLink className="w-4 h-4" />
           </a>
