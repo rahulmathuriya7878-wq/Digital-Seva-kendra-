@@ -149,6 +149,16 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
     window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(summary)}`, '_blank');
   };
 
+  const handleSendToAdminWhatsApp = () => {
+    if (!booking) return;
+    const summary = isHi
+      ? `🚨 *नया जन सेवा टोकन प्राप्त हुआ!*\n\n🎫 *टोकन नंबर:* \`${booking.tokenNumber}\`\n📌 *संदर्भ आईडी:* ${booking.referenceId}\n👤 *ग्राहक का नाम:* ${booking.applicantName}\n📱 *मोबाइल:* +91 ${booking.mobileNumber}\n📍 *जिला:* ${booking.cityOrDistrict}\n🛠 *सेवा:* ${booking.serviceTitle}\n💰 *शुल्क:* ${booking.estimatedFee}\n📅 *तारीख:* ${booking.date}\n\nकृपया इस आवेदन पर कार्रवाई करें।`
+      : `🚨 *New Citizen Service Token Received!*\n\n🎫 *Token No:* \`${booking.tokenNumber}\`\n📌 *Ref ID:* ${booking.referenceId}\n👤 *Customer:* ${booking.applicantName}\n📱 *Mobile:* +91 ${booking.mobileNumber}\n📍 *District:* ${booking.cityOrDistrict}\n🛠 *Service:* ${booking.serviceTitle}\n💰 *Fee:* ${booking.estimatedFee}\n📅 *Date:* ${booking.date}\n\nPlease process this application.`;
+
+    const adminPhone = '918764107756';
+    window.open(`https://wa.me/${adminPhone}?text=${encodeURIComponent(summary)}`, '_blank');
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-xs overflow-y-auto">
       <div className="relative w-full max-w-lg bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden my-6 animate-in fade-in zoom-in-95 duration-150">
@@ -333,6 +343,30 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
           ) : (
             <div className="space-y-4">
               
+              {/* Immediate WhatsApp Action Banner */}
+              <div className="p-4 bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-2xl shadow-md space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                    <MessageCircle className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold">
+                      {isHi ? 'WhatsApp पर तुरंत भेजें!' : 'Send Instantly on WhatsApp!'}
+                    </h4>
+                    <p className="text-[11px] text-emerald-100">
+                      {isHi ? 'पॉप-अप ब्लॉक होने पर नीचे दिए गए बटन पर क्लिक करें:' : 'If popup blocked, click below:'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={handleWhatsAppShare}
+                  className="w-full py-3 px-4 rounded-xl bg-white hover:bg-emerald-50 text-emerald-900 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm animate-pulse"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <span>{isHi ? '💬 WhatsApp पर टोकन प्राप्त करें (Open WhatsApp)' : '💬 Open WhatsApp with Token'}</span>
+                </button>
+              </div>
+
               {/* Success Banner */}
               <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3 text-emerald-900">
                 <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
@@ -432,13 +466,21 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
               </div>
 
               {/* Direct WhatsApp Share Button */}
-              <div>
+              <div className="space-y-2">
                 <button
                   onClick={handleWhatsAppShare}
                   className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
                 >
                   <MessageCircle className="w-4 h-4 text-white" />
                   <span>{isHi ? '💬 WhatsApp पर शेयर करें (Share on WhatsApp)' : '💬 Share on WhatsApp'}</span>
+                </button>
+
+                <button
+                  onClick={handleSendToAdminWhatsApp}
+                  className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs border border-amber-400/30"
+                >
+                  <MessageCircle className="w-4 h-4 text-amber-400" />
+                  <span>{isHi ? '👑 एडमिन WhatsApp (87641 07756) पर भेजें' : '👑 Send to Admin WhatsApp'}</span>
                 </button>
               </div>
 
