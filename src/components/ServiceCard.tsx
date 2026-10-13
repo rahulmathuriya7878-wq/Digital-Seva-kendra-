@@ -21,7 +21,8 @@ import {
   FileCheck2,
   ExternalLink,
   ChevronRight,
-  HelpCircle
+  HelpCircle,
+  Heart
 } from 'lucide-react';
 
 interface ServiceCardProps {
@@ -29,13 +30,17 @@ interface ServiceCardProps {
   language: Language;
   onSelectService: (service: ServiceItem) => void;
   onQuickAction?: (service: ServiceItem) => void;
+  isSaved?: boolean;
+  onToggleSave?: (service: ServiceItem) => void;
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({
   service,
   language,
   onSelectService,
-  onQuickAction
+  onQuickAction,
+  isSaved = false,
+  onToggleSave
 }) => {
   const isHi = language === 'hi';
 
@@ -77,23 +82,43 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-between bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all p-4 sm:p-6">
+    <div className="flex flex-col justify-between bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all p-4 sm:p-6 relative group">
       <div>
-        {/* Top Header: Unboxed metadata line with typographic separators */}
+        {/* Top Header: Unboxed metadata line with typographic separators & Favorite Heart button */}
         <div className="flex items-center justify-between gap-2 text-xs text-slate-500 mb-3">
           <div className="flex items-center gap-1.5 font-medium text-slate-600">
             <span>{getCategoryLabel(service.category)}</span>
             <span aria-hidden="true">·</span>
-            <span className="truncate max-w-[170px]">
+            <span className="truncate max-w-[150px]">
               {isHi ? service.departmentHi : service.departmentEn}
             </span>
           </div>
 
-          {(service.badgeHi || service.badgeEn) && (
-            <span className="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md">
-              {isHi ? service.badgeHi : service.badgeEn}
-            </span>
-          )}
+          <div className="flex items-center gap-1.5">
+            {(service.badgeHi || service.badgeEn) && (
+              <span className="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">
+                {isHi ? service.badgeHi : service.badgeEn}
+              </span>
+            )}
+
+            {onToggleSave && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleSave(service);
+                }}
+                title={isHi ? (isSaved ? 'सहेजी गई सेवा से हटाएं' : 'सेवा सहेजें (Favorite)') : (isSaved ? 'Remove from Saved' : 'Save Service')}
+                className={`p-2 rounded-xl border transition-all cursor-pointer ${
+                  isSaved
+                    ? 'bg-rose-50 border-rose-200 text-rose-600 hover:bg-rose-100'
+                    : 'bg-slate-50 border-slate-200 text-slate-400 hover:text-rose-600 hover:bg-rose-50 hover:border-rose-200'
+                }`}
+              >
+                <Heart className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Card Title & Icon */}

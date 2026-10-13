@@ -29,7 +29,8 @@ import {
   Clock,
   ArrowRight,
   Mail,
-  GraduationCap
+  GraduationCap,
+  Heart
 } from 'lucide-react';
 
 export default function App() {
@@ -37,6 +38,35 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory>('all');
   const [activeSection, setActiveSection] = useState<string>('services');
+
+  const [savedServiceIds, setSavedServiceIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('jan_seva_saved_services');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('jan_seva_saved_services', JSON.stringify(savedServiceIds));
+    } catch (err) {
+      console.warn('Failed to save saved services:', err);
+    }
+  }, [savedServiceIds]);
+
+  const handleToggleSaveService = (service: ServiceItem) => {
+    setSavedServiceIds(prev =>
+      prev.includes(service.id)
+        ? prev.filter(id => id !== service.id)
+        : [...prev, service.id]
+    );
+  };
+
+  const savedServices = useMemo(() => {
+    return SERVICES_DATA.filter(service => savedServiceIds.includes(service.id));
+  }, [savedServiceIds]);
 
   // Modals state
   const [selectedDetailService, setSelectedDetailService] = useState<ServiceItem | null>(null);
@@ -314,6 +344,43 @@ export default function App() {
             </div>
           </div>
 
+          {/* My Saved Services (Favorites) Section */}
+          {savedServices.length > 0 && searchQuery.trim() === '' && selectedCategory === 'all' && (
+            <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-rose-50/80 via-amber-50/50 to-orange-50/60 border border-rose-200/80 shadow-sm space-y-4 mb-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center shadow-xs">
+                    <Heart className="w-4 h-4 fill-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                      {isHi ? 'मेरी सहेजी गई सेवाएं (My Saved Services)' : 'My Saved Services'}
+                    </h3>
+                    <p className="text-xs text-slate-600">
+                      {isHi ? 'आपके पसंदीदा व बार-बार उपयोग होने वाले शॉर्टकट' : 'Your frequently used and bookmarked citizen services'}
+                    </p>
+                  </div>
+                </div>
+                <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-rose-200 text-rose-900 tabular-nums">
+                  {savedServices.length} {isHi ? 'सहेजी गई' : 'Saved'}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {savedServices.map((service) => (
+                  <ServiceCard
+                    key={`saved-${service.id}`}
+                    service={service}
+                    language={language}
+                    onSelectService={handleSelectServiceItem}
+                    isSaved={true}
+                    onToggleSave={handleToggleSaveService}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Active Search Result Feedback Banner */}
           {searchQuery.trim().length > 0 && (
             <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 border border-amber-200 text-amber-950 shadow-xs">
@@ -353,6 +420,8 @@ export default function App() {
                   service={service}
                   language={language}
                   onSelectService={handleSelectServiceItem}
+                  isSaved={savedServiceIds.includes(service.id)}
+                  onToggleSave={handleToggleSaveService}
                 />
               ))}
             </div>

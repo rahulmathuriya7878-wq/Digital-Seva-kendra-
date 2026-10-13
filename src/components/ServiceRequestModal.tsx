@@ -116,7 +116,7 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
       ? `💬 *डिजिटल एवं जन सेवा केंद्र - टोकन पर्ची*\n\n🎫 *टोकन नंबर:* \`${tokenNum}\`\n📌 *संदर्भ आईडी:* ${refNum}\n👤 *आवेदक:* ${name.trim()}\n📱 *मोबाइल:* +91 ${cleanPhone}\n📍 *जिला:* ${district.trim() || 'स्थानीय जिला'}\n🛠 *सेवा:* ${finalServiceTitle}\n💰 *शुल्क:* ${isHi ? currentService.feeHi : currentService.feeEn}\n📅 *तारीख:* ${todayFormatted}\n\nआपका टोकन सफलतापूर्वक बुक कर लिया गया है।`
       : `💬 *Digital & Jan Seva Kendra - Token Slip*\n\n🎫 *Token No:* \`${tokenNum}\`\n📌 *Ref ID:* ${refNum}\n👤 *Applicant:* ${name.trim()}\n📱 *Mobile:* +91 ${cleanPhone}\n📍 *District:* ${district.trim() || 'Local District'}\n🛠 *Service:* ${finalServiceTitle}\n💰 *Fee:* ${isHi ? currentService.feeHi : currentService.feeEn}\n📅 *Date:* ${todayFormatted}\n\nToken booked successfully.`;
 
-    window.open(`https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(summary)}`, '_blank');
+    window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(summary)}`, '_blank');
 
     // Save to Firestore & local storage asynchronously in background
     saveTokenBooking(newBooking).catch(err => {
@@ -146,7 +146,7 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
       : `💬 *Digital & Jan Seva Kendra - Token Slip*\n\n🎫 *Token No:* \`${booking.tokenNumber}\`\n📌 *Ref ID:* ${booking.referenceId}\n👤 *Applicant:* ${booking.applicantName}\n📱 *Mobile:* +91 ${booking.mobileNumber}\n📍 *District:* ${booking.cityOrDistrict}\n🛠 *Service:* ${booking.serviceTitle}\n💰 *Fee:* ${booking.estimatedFee}\n📅 *Date:* ${booking.date}\n\nToken booked successfully.`;
 
     const targetPhone = booking.mobileNumber.length === 10 ? `91${booking.mobileNumber}` : booking.mobileNumber;
-    window.open(`https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(summary)}`, '_blank');
+    window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(summary)}`, '_blank');
   };
 
   return (
