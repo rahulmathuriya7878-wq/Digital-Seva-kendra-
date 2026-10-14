@@ -140,7 +140,13 @@ export default function App() {
       epf: ['pf', 'epfo', 'uan', 'पीएपफ'],
       uan: ['pf', 'epf', 'epfo', 'यूएएन'],
       tds: ['tax', 'income tax', 'itr', 'form 16', 'टैक्स', 'टीडीएस', 'आयकर'],
-      tax: ['tds', 'income tax', 'itr', 'टैक्स', 'आयकर']
+      tax: ['tds', 'income tax', 'itr', 'टैक्स', 'आयकर'],
+      scolarship: ['scholarship', 'chatravritti', 'छात्रवृत्ति'],
+      skolarship: ['scholarship', 'chatravritti', 'छात्रवृत्ति'],
+      chatravritti: ['scholarship', 'छात्रवृत्ति'],
+      voter: ['voter id', 'epic', 'वोटर'],
+      result: ['sarkari', 'रिजल्ट'],
+      bharti: ['sarkari', 'job', 'भर्ती']
     };
 
     // Expand search terms with recognized synonyms

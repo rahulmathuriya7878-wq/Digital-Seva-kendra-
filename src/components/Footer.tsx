@@ -1,6 +1,6 @@
 import React from 'react';
 import { Language } from '../types/service';
-import { Landmark, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Landmark, ExternalLink, ShieldCheck, Share2 } from 'lucide-react';
 
 interface FooterProps {
   language: Language;
@@ -19,6 +19,26 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
     { name: 'Parivahan Sarathi', url: 'https://parivahan.gov.in/' },
     { name: 'PM Kisan Samman Nidhi', url: 'https://pmkisan.gov.in/' }
   ];
+
+  const handleShareWebsite = () => {
+    const textHi = `🏛 *डिजिटल एवं जन सेवा केंद्र पोर्टल* 🏛\n\nभारत के नागरिकों हेतु सभी ऑनलाइन इंटरनेट सेवाएं, प्रमाण पत्र, सरकारी योजनाएं व फॉर्म भरने का एक ही मंच।\n\n🔹 *प्रमुख सेवाएं:* \n- सरकारी नौकरी फॉर्म व रिजल्ट्स\n- PF (EPFO) व पेंशन सेवाएं\n- छात्रवृत्ति आवेदन (Scholarship)\n- आधार कार्ड डाउनलोड व पीवीसी\n- नया पैन कार्ड आवेदन\n- भूलेख / अपना खाता / जमाबंदी (UP & Rajasthan)\n- जाति, निवास व आय प्रमाण पत्र\n- श्रम कार्ड, वोटर आईडी व राशन कार्ड\n\n💬 *आधिकारिक WhatsApp हेल्पलाइन:* 87641 07756\n\n🌐 *पोर्टल लिंक:* https://digital-seva-kendra-five.vercel.app/\n\nअपने सभी नागरिक कार्यों और ऑनलाइन फॉर्म्स के लिए आज ही विजिट करें!`;
+
+    const textEn = `🏛 *Digital & Jan Seva Kendra Portal* 🏛\n\nSingle window digital portal for all Indian citizen online services, certificates, and government applications.\n\n🔹 *Key Services:* \n- Sarkari Jobs & Results\n- PF (EPFO) & Pension Services\n- Scholarship Applications\n- Aadhaar Services & PVC\n- New PAN Card Application\n- Bhulekh / Apna Khata / Jamabandi\n- Caste, Domicile & Income Certificates\n- Labour Card, Voter ID & Ration Card\n\n💬 *Official WhatsApp Helpline:* +91 8764107756\n\n🌐 *Portal Link:* https://digital-seva-kendra-five.vercel.app/\n\nVisit today for all your digital and online citizen needs!`;
+
+    const shareText = isHi ? textHi : textEn;
+
+    if (navigator.share) {
+      navigator.share({
+        title: isHi ? 'डिजिटल एवं जन सेवा केंद्र पोर्टल' : 'Digital & Jan Seva Kendra Portal',
+        text: shareText,
+        url: 'https://digital-seva-kendra-five.vercel.app/'
+      }).catch(() => {
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+      });
+    } else {
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+    }
+  };
 
   return (
     <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 pt-12 pb-10">
@@ -40,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
                 ? 'भारत के नागरिकों हेतु सभी ऑनलाइन इंटरनेट सेवाएं, प्रमाण पत्र, सरकारी योजनाएं व फॉर्म भरने का आधिकारिक सुविधा मंच।'
                 : 'Unified single-window digital access point for Indian citizen services, certificates, and utility billings.'}
             </p>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-col gap-2">
               <a
                 href="https://wa.me/918764107756"
                 target="_blank"
@@ -50,6 +70,13 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
                 <span>💬</span>
                 <span>{isHi ? 'WhatsApp हेल्पलाइन: 87641 07756' : 'WhatsApp Helpline: 87641 07756'}</span>
               </a>
+              <button
+                onClick={handleShareWebsite}
+                className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 hover:text-blue-200 font-bold text-xs transition-colors cursor-pointer"
+              >
+                <Share2 className="w-3.5 h-3.5" />
+                <span>{isHi ? '💬 वेबसाइट पूरी जानकारी सहित शेयर करें' : '💬 Share Website with Details'}</span>
+              </button>
             </div>
           </div>
 

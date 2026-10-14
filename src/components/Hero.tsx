@@ -139,6 +139,33 @@ export const Hero: React.FC<HeroProps> = ({
             </button>
           </form>
 
+          {/* Quick Search Chips */}
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-xs">
+            <span className="text-slate-500 font-medium mr-1">{isHi ? 'लोकप्रिय खोज:' : 'Popular:'}</span>
+            {[
+              { labelHi: 'सरकारी नौकरी', labelEn: 'Sarkari Jobs', term: 'sarkari' },
+              { labelHi: 'आधार कार्ड', labelEn: 'Aadhaar', term: 'aadhaar' },
+              { labelHi: 'पैन कार्ड', labelEn: 'PAN Card', term: 'pan' },
+              { labelHi: 'छात्रवृत्ति', labelEn: 'Scholarship', term: 'scholarship' },
+              { labelHi: 'भूलेख / खतौनी', labelEn: 'Bhulekh', term: 'bhulekh' },
+              { labelHi: 'PF (EPFO)', labelEn: 'PF Balance', term: 'pf' },
+              { labelHi: 'जाति प्रमाण पत्र', labelEn: 'Caste Cert', term: 'caste' }
+            ].map((chip) => (
+              <button
+                key={chip.term}
+                type="button"
+                onClick={() => {
+                  onSearchChange(chip.term);
+                  const el = document.getElementById('services');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-2.5 py-1 rounded-lg bg-white/90 hover:bg-amber-100/70 border border-slate-200 text-slate-700 hover:text-amber-900 font-medium transition-colors cursor-pointer shadow-2xs"
+              >
+                {isHi ? chip.labelHi : chip.labelEn}
+              </button>
+            ))}
+          </div>
+
           {/* Real-time Interactive Autocomplete Dropdown */}
           {isDropdownOpen && searchQuery.trim().length > 0 && (
             <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 overflow-hidden divide-y divide-slate-100 animate-in fade-in slide-in-from-top-2 duration-150">
