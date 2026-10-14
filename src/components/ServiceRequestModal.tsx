@@ -134,8 +134,8 @@ export const ServiceRequestModal: React.FC<ServiceRequestModalProps> = ({
   const handleSendToAdminWhatsApp = () => {
     if (!booking) return;
     const summary = isHi
-      ? `🚨 *नया जन सेवा टोकन प्राप्त हुआ!*\n\n🎫 *टोकन नंबर:* \`${booking.tokenNumber}\`\n📌 *संदर्भ आईडी:* ${booking.referenceId}\n👤 *ग्राहक का नाम:* ${booking.applicantName}\n📱 *मोबाइल:* +91 ${booking.mobileNumber}\n📍 *जिला:* ${booking.cityOrDistrict}\n🛠 *सेवा:* ${booking.serviceTitle}\n💰 *शुल्क:* ${booking.estimatedFee}\n📅 *तारीख:* ${booking.date}\n\nकृपया इस आवेदन पर कार्रवाई करें।`
-      : `🚨 *New Citizen Service Token Received!*\n\n🎫 *Token No:* \`${booking.tokenNumber}\`\n📌 *Ref ID:* ${booking.referenceId}\n👤 *Customer:* ${booking.applicantName}\n📱 *Mobile:* +91 ${booking.mobileNumber}\n📍 *District:* ${booking.cityOrDistrict}\n🛠 *Service:* ${booking.serviceTitle}\n💰 *Fee:* ${booking.estimatedFee}\n📅 *Date:* ${booking.date}\n\nPlease process this application.`;
+      ? `🎫 *टोकन एवं ग्राहक WhatsApp नंबर*\n\n🔹 *टोकन नंबर:* \`${booking.tokenNumber}\`\n📱 *ग्राहक WhatsApp:* https://wa.me/91${booking.mobileNumber}\n\n👤 *आवेदक:* ${booking.applicantName}\n🛠 *सेवा:* ${booking.serviceTitle}\n📍 *जिला:* ${booking.cityOrDistrict}\n💰 *शुल्क:* ${booking.estimatedFee}\n📅 *तारीख:* ${booking.date}\n\nकृपया इस टोकन पर कार्रवाई करें।`
+      : `🎫 *Token & Customer WhatsApp Number*\n\n🔹 *Token No:* \`${booking.tokenNumber}\`\n📱 *Customer WhatsApp:* https://wa.me/91${booking.mobileNumber}\n\n👤 *Applicant:* ${booking.applicantName}\n🛠 *Service:* ${booking.serviceTitle}\n📍 *District:* ${booking.cityOrDistrict}\n💰 *Fee:* ${booking.estimatedFee}\n📅 *Date:* ${booking.date}\n\nPlease process this token.`;
 
     const adminPhone = '918764107756';
     window.open(`https://wa.me/${adminPhone}?text=${encodeURIComponent(summary)}`, '_blank');

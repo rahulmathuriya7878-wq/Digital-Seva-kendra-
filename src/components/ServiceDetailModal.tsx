@@ -97,36 +97,6 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             </div>
           </div>
 
-          {/* Visual Request Life Cycle Stages */}
-          <div className="p-4 rounded-2xl bg-slate-900 text-white space-y-3">
-            <h3 className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-              <span>🔄</span>
-              <span>{isHi ? 'आवेदन प्रक्रिया के चरण (Request Workflow Stages)' : 'Application Workflow Stages'}</span>
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-              <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700/80 text-center space-y-1">
-                <span className="text-base">📝</span>
-                <div className="text-[11px] font-bold text-white">{isHi ? '1. आवेदन (Initiated)' : '1. Initiated'}</div>
-                <div className="text-[10px] text-slate-400">{isHi ? 'टोकन व फॉर्म जमा' : 'Token & Submit'}</div>
-              </div>
-              <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700/80 text-center space-y-1">
-                <span className="text-base">🔍</span>
-                <div className="text-[11px] font-bold text-white">{isHi ? '2. सत्यापन (Verified)' : '2. Verified'}</div>
-                <div className="text-[10px] text-slate-400">{isHi ? 'दस्तावेज जाँच' : 'Doc Check'}</div>
-              </div>
-              <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700/80 text-center space-y-1">
-                <span className="text-base">⚙️</span>
-                <div className="text-[11px] font-bold text-white">{isHi ? '3. प्रक्रिया (Processing)' : '3. Processing'}</div>
-                <div className="text-[10px] text-slate-400">{isHi ? 'विभाग द्वारा कार्यवाही' : 'Dept Action'}</div>
-              </div>
-              <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700/80 text-center space-y-1">
-                <span className="text-base">✅</span>
-                <div className="text-[11px] font-bold text-emerald-400">{isHi ? '4. पूर्ण (Completed)' : '4. Completed'}</div>
-                <div className="text-[10px] text-slate-400">{isHi ? 'प्रमाण पत्र / रसीद' : 'Final Output'}</div>
-              </div>
-            </div>
-          </div>
-
           {/* Description */}
           <div>
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
