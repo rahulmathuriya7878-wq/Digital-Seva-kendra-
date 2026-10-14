@@ -6,9 +6,10 @@ interface FooterProps {
   language: Language;
   onSelectNav: (sectionId: string) => void;
   onOpenSearchConsoleModal?: () => void;
+  onOpenShareModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSearchConsoleModal }) => {
+export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSearchConsoleModal, onOpenShareModal }) => {
   const isHi = language === 'hi';
 
   const officialLinks = [
@@ -71,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
                 <span>{isHi ? 'WhatsApp हेल्पलाइन: 87641 07756' : 'WhatsApp Helpline: 87641 07756'}</span>
               </a>
               <button
-                onClick={handleShareWebsite}
+                onClick={onOpenShareModal || handleShareWebsite}
                 className="group inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 hover:text-blue-200 font-bold text-xs transition-colors cursor-pointer"
               >
                 <Share2 className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform duration-300" />

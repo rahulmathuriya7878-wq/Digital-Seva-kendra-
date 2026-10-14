@@ -16,6 +16,7 @@ import { GoogleDocsHubModal } from './components/GoogleDocsHubModal';
 import { GoogleSearchConsoleGuideModal } from './components/GoogleSearchConsoleGuideModal';
 import { AdminTokensPortal } from './components/AdminTokensPortal';
 import { Footer } from './components/Footer';
+import { WebsiteShareModal } from './components/WebsiteShareModal';
 import { 
   Zap, 
   FileText, 
@@ -84,6 +85,7 @@ export default function App() {
   const [docsTemplate, setDocsTemplate] = useState<{ title: string; content: string } | undefined>(undefined);
   const [isSearchConsoleModalOpen, setIsSearchConsoleModalOpen] = useState<boolean>(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState<boolean>(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
 
   const isHi = language === 'hi';
 
@@ -477,6 +479,7 @@ export default function App() {
         language={language} 
         onSelectNav={handleSelectNav} 
         onOpenSearchConsoleModal={() => setIsSearchConsoleModalOpen(true)}
+        onOpenShareModal={() => setIsShareModalOpen(true)}
       />
 
       {/* Modals */}
@@ -562,6 +565,13 @@ export default function App() {
             setIsAdminModalOpen(false);
             handleOpenGmailWithContent(recipient, subject, body);
           }}
+        />
+      )}
+
+      {isShareModalOpen && (
+        <WebsiteShareModal
+          language={language}
+          onClose={() => setIsShareModalOpen(false)}
         />
       )}
 
