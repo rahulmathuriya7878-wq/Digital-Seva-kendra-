@@ -176,8 +176,6 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
             © 2026 Digital Seva Portal · {isHi ? 'समस्त अधिकार सुरक्षित' : 'All Rights Reserved'}
           </div>
           <div className="flex items-center gap-4">
-            <span>{isHi ? 'राष्ट्रीय ई-गवर्नेंस योजना समर्थित' : 'National e-Governance Plan'}</span>
-            <span>·</span>
             <span>{isHi ? 'डिजिटल भारत' : 'Digital India'}</span>
           </div>
         </div>

@@ -262,70 +262,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     iconName: 'Truck',
     searchKeywords: ['driving licence', 'driving license', 'dl', 'learning licence', 'learner', 'parivahan', 'sarathi', 'rto', 'vahan', 'gadi licence', 'ड्राइविंग लाइसेंस', 'डीएल', 'लर्निंग लाइसेंस', 'सारथी', 'परिवहन']
   },
-  {
-    id: 'caste-certificate',
-    titleHi: 'जाति प्रमाण पत्र (Caste Certificate)',
-    titleEn: 'Caste Certificate Application',
-    category: 'certificates',
-    shortDescHi: 'SC / ST / OBC / EWS वर्ग हेतु राज्य व केंद्र सरकार के प्रारूप में डिजिटल सत्यापित जाति प्रमाण पत्र।',
-    shortDescEn: 'Digitally signed state and central format caste certificate for SC/ST/OBC/EWS reservations.',
-    departmentHi: 'राजस्व विभाग (Revenue Department - e-District)',
-    departmentEn: 'State Revenue Department (e-District Portal)',
-    officialUrl: 'https://edistrict.up.gov.in/',
-    feeHi: 'सेवा शुल्क ₹15-₹30',
-    feeEn: 'Service Fee ₹15-₹30',
-    processingTimeHi: '7 से 10 कार्य दिवस',
-    processingTimeEn: '7 to 10 Working Days',
-    requiredDocsHi: ['स्वप्रमाणित घोषणा पत्र', 'आधार कार्ड', 'परिवार के किसी सदस्य का पुराना जाति प्रमाण पत्र या खतौनी', 'पासपोर्ट फोटो'],
-    requiredDocsEn: ['Self-declaration form', 'Aadhaar Card', 'Family member old caste certificate or land record', 'Passport Photo'],
-    stepsHi: [
-      'राज्य के e-District पोर्टल पर नागरिक खाता खोलें।',
-      'जाति प्रमाण पत्र (हिंदी/अंग्रेजी) फॉर्म भरें व पिता की जाति दर्ज करें।',
-      'दस्तावेज स्कैन कर 100KB साइज में अपलोड करें।',
-      'लेखपाल / कानूनगो की रिपोर्ट के बाद ऑनलाइन प्रमाण पत्र डाउनलोड करें।'
-    ],
-    stepsEn: [
-      'Log into your state e-District citizen portal.',
-      'Fill the Caste Certificate application form with ancestral details.',
-      'Upload scanned documents under 100KB.',
-      'Download digitally signed certificate after revenue inspector report.'
-    ],
-    iconName: 'Award',
-    badgeHi: 'राजस्व सेवा',
-    badgeEn: 'Revenue',
-    searchKeywords: ['caste certificate', 'caste', 'jati', 'jaati', 'obc', 'sc', 'st', 'ews', 'praman patra', 'जाति प्रमाण पत्र', 'जाति', 'ईडब्ल्यूएस', 'ओबीसी', 'प्रमाण पत्र']
-  },
-  {
-    id: 'domicile-certificate',
-    titleHi: 'निवास प्रमाण पत्र (Domicile / Residence Certificate)',
-    titleEn: 'Domicile / Residence Certificate',
-    category: 'certificates',
-    shortDescHi: 'राज्य का मूल निवासी होने का वैध प्रमाण पत्र, जो सरकारी नौकरियों व प्रवेश हेतु अनिवार्य है।',
-    shortDescEn: 'Official proof of permanent residence required for state quota jobs and higher education admissions.',
-    departmentHi: 'राजस्व विभाग (तहसीलदार / एसडीएम कार्यालय)',
-    departmentEn: 'Revenue Department (SDM / Tehsildar Office)',
-    officialUrl: 'https://edistrict.up.gov.in/',
-    feeHi: 'सेवा शुल्क ₹15-₹30',
-    feeEn: 'Service Fee ₹15-₹30',
-    processingTimeHi: '7 कार्य दिवस',
-    processingTimeEn: '7 Working Days',
-    requiredDocsHi: ['आधार कार्ड / वोटर आईडी', 'निवास का प्रमाण (बिजली बिल, गृहकर रसीद या राशन कार्ड)', '10 साल से निवास का स्वघोषणा पत्र', 'पासपोर्ट फोटो'],
-    requiredDocsEn: ['Aadhaar / Voter ID', 'Proof of residence (Electricity bill, House tax or Ration card)', 'Declaration of living for 10+ years', 'Passport Photo'],
-    stepsHi: [
-      'नागरिक सेवा पोर्टल पर निवास प्रमाण पत्र आवेदन फॉर्म खोलें।',
-      'वर्षों से रहने की अवधि और स्थानीय पता दर्ज करें।',
-      'पहचान व निवास प्रमाण पत्र अपलोड करें।',
-      'लेखपाल जांच के बाद प्रमाण पत्र जारी कर दिया जाता है।'
-    ],
-    stepsEn: [
-      'Open Residence Certificate form on the citizen service portal.',
-      'Enter duration of stay in the state and complete address.',
-      'Upload identity and local residence proofs.',
-      'Certificate is issued post physical/record verification by Lekhpal.'
-    ],
-    iconName: 'Home',
-    searchKeywords: ['domicile', 'residence', 'niwas', 'mool niwas', 'niwas praman patra', 'adhisoochna', 'निवास प्रमाण पत्र', 'मूल निवास', 'निवास', 'स्थानीय निवासी']
-  },
+
   {
     id: 'bhulekh-land-records',
     titleHi: 'भूलेख खसरा-खतौनी, अपना खाता व जमाबंदी (UP & Rajasthan Bhulekh)',
