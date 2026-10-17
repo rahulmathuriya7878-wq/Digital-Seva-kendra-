@@ -693,7 +693,7 @@ __________________________________________________
                     required
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
-                    placeholder={isHi ? 'उदा: जाति प्रमाण पत्र हेतु शपथ पत्र' : 'e.g. Caste Certificate Application'}
+                    placeholder={isHi ? 'उदा: आय प्रमाण पत्र हेतु शपथ पत्र' : 'e.g. Income Certificate Application'}
                     className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>

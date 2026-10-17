@@ -22,9 +22,9 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
   ];
 
   const handleShareWebsite = () => {
-    const textHi = `🏛 *डिजिटल एवं जन सेवा केंद्र पोर्टल* 🏛\n\nभारत के नागरिकों हेतु सभी ऑनलाइन इंटरनेट सेवाएं, प्रमाण पत्र, सरकारी योजनाएं व फॉर्म भरने का एक ही मंच।\n\n🔹 *प्रमुख सेवाएं:* \n- सरकारी नौकरी फॉर्म व रिजल्ट्स\n- PF (EPFO) व पेंशन सेवाएं\n- छात्रवृत्ति आवेदन (Scholarship)\n- आधार कार्ड डाउनलोड व पीवीसी\n- नया पैन कार्ड आवेदन\n- भूलेख / अपना खाता / जमाबंदी (UP & Rajasthan)\n- जाति, निवास व आय प्रमाण पत्र\n- श्रम कार्ड, वोटर आईडी व राशन कार्ड\n\n🌐 *पोर्टल लिंक:* https://digital-seva-kendra-seven.vercel.app/\n\nअपने सभी नागरिक कार्यों और ऑनलाइन फॉर्म्स के लिए आज ही विजिट करें!`;
+    const textHi = `🏛 *डिजिटल एवं जन सेवा केंद्र पोर्टल* 🏛\n\nभारत के नागरिकों हेतु सभी ऑनलाइन इंटरनेट सेवाएं, प्रमाण पत्र, सरकारी योजनाएं व फॉर्म भरने का एक ही मंच।\n\n🔹 *प्रमुख सेवाएं:* \n- सरकारी नौकरी फॉर्म व रिजल्ट्स\n- PF (EPFO) व पेंशन सेवाएं\n- छात्रवृत्ति आवेदन (Scholarship)\n- आधार कार्ड डाउनलोड व पीवीसी\n- नया पैन कार्ड आवेदन\n- भूलेख / अपना खाता / जमाबंदी (UP & Rajasthan)\n- श्रम कार्ड, वोटर आईडी व राशन कार्ड\n\n🌐 *पोर्टल लिंक:* https://digital-seva-kendra-seven.vercel.app/\n\nअपने सभी नागरिक कार्यों और ऑनलाइन फॉर्म्स के लिए आज ही विजिट करें!`;
 
-    const textEn = `🏛 *Digital & Jan Seva Kendra Portal* 🏛\n\nSingle window digital portal for all Indian citizen online services, certificates, and government applications.\n\n🔹 *Key Services:* \n- Sarkari Jobs & Results\n- PF (EPFO) & Pension Services\n- Scholarship Applications\n- Aadhaar Services & PVC\n- New PAN Card Application\n- Bhulekh / Apna Khata / Jamabandi\n- Caste, Domicile & Income Certificates\n- Labour Card, Voter ID & Ration Card\n\n🌐 *Portal Link:* https://digital-seva-kendra-seven.vercel.app/\n\nVisit today for all your digital and online citizen needs!`;
+    const textEn = `🏛 *Digital & Jan Seva Kendra Portal* 🏛\n\nSingle window digital portal for all Indian citizen online services, certificates, and government applications.\n\n🔹 *Key Services:* \n- Sarkari Jobs & Results\n- PF (EPFO) & Pension Services\n- Scholarship Applications\n- Aadhaar Services & PVC\n- New PAN Card Application\n- Bhulekh / Apna Khata / Jamabandi\n- Labour Card, Voter ID & Ration Card\n\n🌐 *Portal Link:* https://digital-seva-kendra-seven.vercel.app/\n\nVisit today for all your digital and online citizen needs!`;
 
     const shareText = isHi ? textHi : textEn;
 
@@ -61,16 +61,7 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
                 ? 'भारत के नागरिकों हेतु सभी ऑनलाइन इंटरनेट सेवाएं, प्रमाण पत्र, सरकारी योजनाएं व फॉर्म भरने का आधिकारिक सुविधा मंच।'
                 : 'Unified single-window digital access point for Indian citizen services, certificates, and utility billings.'}
             </p>
-            <div className="pt-2 flex flex-col gap-2">
-              <a
-                href="https://wa.me/918764107756"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 hover:text-emerald-300 font-bold text-xs transition-colors"
-              >
-                <span>💬</span>
-                <span>{isHi ? 'WhatsApp हेल्पलाइन: 87641 07756' : 'WhatsApp Helpline: 87641 07756'}</span>
-              </a>
+             <div className="pt-2 flex flex-col gap-2">
               <button
                 onClick={onOpenShareModal || handleShareWebsite}
                 className="group inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 hover:text-blue-200 font-bold text-xs transition-colors cursor-pointer"
@@ -94,12 +85,12 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
               </li>
               <li>
                 <button onClick={() => onSelectNav('services')} className="hover:text-white transition-colors">
-                  {isHi ? 'जाति व निवास प्रमाण पत्र' : 'Revenue Certificates'}
+                  {isHi ? 'छात्रवृत्ति आवेदन' : 'Scholarship Applications'}
                 </button>
               </li>
               <li>
                 <button onClick={() => onSelectNav('bills')} className="hover:text-white transition-colors">
-                  {isHi ? 'बिजली बिल भुगतान (BBPS)' : 'Electricity Bill Payment'}
+                  {isHi ? 'फास्टैग व भुगतान सेवाएं' : 'FASTag & Bill Services'}
                 </button>
               </li>
               <li>

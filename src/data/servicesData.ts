@@ -68,6 +68,37 @@ export const SERVICES_DATA: ServiceItem[] = [
     searchKeywords: ['pf', 'epf', 'epfo', 'uan', 'pf balance', 'pf withdrawal', 'pf claim', 'प्रोविडेंट फंड', 'पीएपफ', 'ईपीएफ', 'यूएएन', 'पीएफ बैलेंस']
   },
   {
+    id: 'tds-tax-services',
+    titleHi: 'TDS क्लेम, आयकर रिटर्न व फॉर्म 16 (TDS Claim)',
+    titleEn: 'TDS Claim, Income Tax Return & Form 16',
+    category: 'pf-tax',
+    shortDescHi: 'टीडीएस क्लेम (TDS Claim), फॉर्म 16 डाउनलोड, आईटीआर (ITR) फाइलिंग व टैक्स रिफंड स्टेटस चेक।',
+    shortDescEn: 'TDS claim & refund processing, Form 16 download, Income Tax Return (ITR) filing.',
+    departmentHi: 'आयकर विभाग भारत सरकार (Income Tax Department)',
+    departmentEn: 'Income Tax Department, Government of India',
+    officialUrl: 'https://www.incometax.gov.in/',
+    feeHi: 'सेवा शुल्क ₹100 - ₹300',
+    feeEn: 'Service Fee ₹100 - ₹300',
+    processingTimeHi: '2 से 4 कार्य दिवस',
+    processingTimeEn: '2 to 4 Working Days',
+    requiredDocsHi: ['पैन कार्ड (PAN Card)', 'फॉर्म 16 / सैलरी स्लिप', 'बैंक स्टेटमेंट व TDS विवरण (Form 26AS)'],
+    requiredDocsEn: ['PAN Card', 'Form 16 / Salary slips', 'Bank Statement & Form 26AS TDS details'],
+    stepsHi: [
+      'आयकर ई-फाइलिंग पोर्टल पर लॉगिन करें।',
+      'Form 26AS व Annual Information Statement (AIS) जांचें।',
+      'आईटीआर (ITR-1 / ITR-4) भरकर सबमिट करें।'
+    ],
+    stepsEn: [
+      'Login to Income Tax e-filing portal.',
+      'Verify Form 26AS and AIS statement.',
+      'Fill and submit ITR return.'
+    ],
+    iconName: 'Banknote',
+    badgeHi: 'टैक्स सेवा',
+    badgeEn: 'Tax Services',
+    searchKeywords: ['tds', 'tax', 'income tax', 'itr', 'form 16', 'form 26as', 'pan tax', 'टीडीएस', 'टैक्स', 'आयकर', 'आईटीआर', 'फॉर्म 16']
+  },
+  {
     id: 'scholarship-portal',
     titleHi: 'छात्रवृत्ति आवेदन (Pre & Post Matric Scholarship)',
     titleEn: 'Scholarship Application (State & NSP)',
@@ -81,18 +112,18 @@ export const SERVICES_DATA: ServiceItem[] = [
     feeEn: '100₹',
     processingTimeHi: 'सत्र अनुसार (संस्थान सत्यापन के बाद)',
     processingTimeEn: 'Session-based upon institute verification',
-    requiredDocsHi: ['पिछली कक्षा की मार्कशीट', 'आय प्रमाण पत्र (सक्षम अधिकारी द्वारा)', 'जाति प्रमाण पत्र (यदि लागू हो)', 'फीस रसीद व संस्था नामांकन संख्या'],
-    requiredDocsEn: ['Previous qualifying marksheets', 'Valid Income certificate', 'Caste certificate (if applicable)', 'Fee receipt & Institute Roll/Registration Number'],
+    requiredDocsHi: ['पिछली कक्षा की मार्कशीट', 'आय प्रमाण पत्र (सक्षम अधिकारी द्वारा)', 'फीस रसीद व संस्था नामांकन संख्या'],
+    requiredDocsEn: ['Previous qualifying marksheets', 'Valid Income certificate', 'Fee receipt & Institute Roll/Registration Number'],
     stepsHi: [
       'पोर्टल पर Fresh या Renewal रजिस्ट्रेशन करें।',
       'संस्थान का नाम, पाठ्यक्रम, वर्ष और फीस विवरण दर्ज करें।',
-      'आय, जाति और अंकपत्र विवरण भरकर डिजिटल लॉकर से सत्यापित करें।',
+      'आय और अंकपत्र विवरण भरकर डिजिटल लॉकर से सत्यापित करें।',
       'आवेदन का फाइनल प्रिंट लेकर सभी कागजातों सहित अपने कॉलेज/स्कूल में जमा करें।'
     ],
     stepsEn: [
       'Register as Fresh or Renewal candidate on scholarship portal.',
       'Enter college name, course, current academic year, and tuition fee.',
-      'Input income, caste certificates and link via DigiLocker.',
+      'Input income and marksheets via DigiLocker.',
       'Take final printout and submit hard copy with attachments to college.'
     ],
     iconName: 'GraduationCap',
@@ -200,37 +231,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     badgeEn: 'Election',
     searchKeywords: ['voter', 'voter id', 'epic', 'chunav', 'matdata', 'matdan', 'form 6', 'election card', 'वोटर कार्ड', 'मतदाता पहचान पत्र', 'पहचान पत्र', 'वोटर लिस्ट']
   },
-  {
-    id: 'ration-card-services',
-    titleHi: 'राशन कार्ड पात्रता व नया नाम जोड़ना',
-    titleEn: 'Ration Card NFSA List & Member Addition',
-    category: 'identity',
-    shortDescHi: 'राष्ट्रीय खाद्य सुरक्षा पोर्टल (NFSA) पर पात्रता सूची देखें, नया राशन कार्ड या नए सदस्य का नाम जोड़ें।',
-    shortDescEn: 'Check NFSA ration quota list, apply for new ration card or add new born / marriage family members.',
-    departmentHi: 'खाद्य एवं रसद विभाग (Department of Food & Public Distribution)',
-    departmentEn: 'Department of Food & Public Distribution (NFSA)',
-    officialUrl: 'https://nfsa.gov.in/',
-    feeHi: 'पोर्टल 100₹ / सीएससी शुल्क ₹20-₹30',
-    feeEn: 'Portal 100₹ / Kiosk charge ₹20-₹30',
-    processingTimeHi: '15 से 30 दिन',
-    processingTimeEn: '15 to 30 Days',
-    requiredDocsHi: ['मुखिया महिला का आधार व फोटो', 'सभी सदस्यों के आधार कार्ड', 'आय प्रमाण पत्र व बैंक पासबुक', 'निवास प्रमाण (बिजली बिल)'],
-    requiredDocsEn: ['Head female member Aadhaar & photo', 'Aadhaar cards of all members', 'Income certificate & Bank passbook', 'Address proof'],
-    stepsHi: [
-      'राज्य खाद्य पोर्टल या NFSA पोर्टल खोलें।',
-      'राशन कार्ड पात्रता सूची (RC Detail) में जिला व ब्लॉक अनुसार नाम देखें।',
-      'नाम संशोधन या नए सदस्य हेतु सदस्य का आधार व जन्म प्रमाण पत्र संलग्न करें।',
-      'सत्यापन उपरांत डीलर से नया राशन कार्ड प्राप्त करें।'
-    ],
-    stepsEn: [
-      'Open state food portal or NFSA.gov.in.',
-      'Check district/block beneficiary list using Ration Card number.',
-      'Submit member addition form with member Aadhaar & birth certificate.',
-      'Obtain updated ration booklet from local fair price shop upon verification.'
-    ],
-    iconName: 'Users',
-    searchKeywords: ['ration', 'rashan', 'ration card', 'rashan card', 'nfsa', 'kotedar', 'quota', 'rashan katha', 'राशन कार्ड', 'राशन', 'खाद्य सुरक्षा', 'कोटेदार', 'राशन पर्ची']
-  },
+
   {
     id: 'driving-licence-vahan',
     titleHi: 'ड्राइविंग लाइसेंस व वाहन सारथी सेवाएं',
@@ -263,39 +264,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     searchKeywords: ['driving licence', 'driving license', 'dl', 'learning licence', 'learner', 'parivahan', 'sarathi', 'rto', 'vahan', 'gadi licence', 'ड्राइविंग लाइसेंस', 'डीएल', 'लर्निंग लाइसेंस', 'सारथी', 'परिवहन']
   },
 
-  {
-    id: 'bhulekh-land-records',
-    titleHi: 'भूलेख खसरा-खतौनी, अपना खाता व जमाबंदी (UP & Rajasthan Bhulekh)',
-    titleEn: 'Bhulekh Khasra-Khatauni, Apna Khata & Land Maps',
-    category: 'certificates',
-    shortDescHi: 'उत्तर प्रदेश (UP Bhulekh) व राजस्थान (अपना खाता / ई-धरती Jamabandi) की जमीन की खतौनी, खसरा नंबर व भू-नक्शा ऑनलाइन देखें।',
-    shortDescEn: 'View and download official RoR (Record of Rights), Khasra-Khatauni, Apna Khata Jamabandi for UP & Rajasthan.',
-    departmentHi: 'राजस्व विभाग (Board of Revenue - UP & Rajasthan Directorate)',
-    departmentEn: 'Board of Revenue Land Records Directorate (UP & Rajasthan)',
-    officialUrl: 'https://apnakhata.raj.nic.in/',
-    feeHi: '',
-    feeEn: '',
-    processingTimeHi: 'तुरंत (Real-time Instant)',
-    processingTimeEn: 'Instant (Real-time)',
-    requiredDocsHi: ['जिला, तहसील व गांव/ग्राम का नाम', 'खाता संख्या, खसरा (गाटा) संख्या या खातेदार का नाम'],
-    requiredDocsEn: ['District, Tehsil and Village Name', 'Khata Number, Khasra Number or Landholder Name'],
-    stepsHi: [
-      'राजस्थान के लिए "अपना खाता (Apna Khata)" पोर्टल या यूपी के लिए "UP Bhulekh" चुनें।',
-      'अपना जिला, तहसील, और गांव (Village) चुनें।',
-      'खातेदार के नाम, खसरा नंबर या खाता संख्या दर्ज करें।',
-      'डिजिटल खतौनी / जमाबंदी नकल ऑनलाइन देखें और प्रिंट करें।'
-    ],
-    stepsEn: [
-      'Select Rajasthan Apna Khata or UP Bhulekh portal.',
-      'Choose your District, Tehsil, and Village.',
-      'Search by Landowner Name, Plot/Khasra Number or Khata Number.',
-      'View and print official Jamabandi or Khatauni instantly.'
-    ],
-    iconName: 'Map',
-    badgeHi: 'जमीन दस्तावेज',
-    badgeEn: 'Land Record',
-    searchKeywords: ['bhulekh', 'bhoolekh', 'khasra', 'khatauni', 'apna khata', 'jamabandi', 'rajasthan bhulekh', 'edharti', 'gata', 'land record', 'zameen', 'bhu naksha', 'naksha', 'भूलेख', 'खसरा', 'खतौनी', 'अपना खाता', 'जमाबंदी', 'राजस्थान भूलेख', 'ई धरती', 'जमीन']
-  },
+
   {
     id: 'pm-kisan-status',
     titleHi: 'पीएम किसान सम्मान निधि (किस्त व ई-केवाईसी)',
@@ -360,37 +329,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     iconName: 'Briefcase',
     searchKeywords: ['eshram', 'e shram', 'shram card', 'uan card', 'majdoor', 'labour card', 'ई-श्रम कार्ड', 'ई श्रम', 'श्रम कार्ड', 'मजदूर कार्ड', 'श्रमिक']
   },
-  {
-    id: 'lpg-gas-booking',
-    titleHi: 'एलपीजी गैस सिलेंडर बुकिंग व सब्सिडी (LPG Seva)',
-    titleEn: 'LPG Gas Cylinder Booking & Subsidy Check',
-    category: 'bills',
-    shortDescHi: 'Indane, Bharat Gas या HP Gas सिलेंडर रिफिल बुक करें, 17 अंकों की एलपीजी आईडी व सब्सिडी बैंक खाता जांचें।',
-    shortDescEn: 'Book LPG cylinder refill for Indane, HP, Bharat Gas and check direct DBTL bank subsidy status.',
-    departmentHi: 'पेट्रोलियम एवं प्राकृतिक गैस मंत्रालय (Ministry of Petroleum)',
-    departmentEn: 'Ministry of Petroleum and Natural Gas (MyLPG.in)',
-    officialUrl: 'https://www.mylpg.in/',
-    feeHi: 'सिलेंडर का आधिकारिक बाजार मूल्य (DBTL सब्सिडी खाते में वापस)',
-    feeEn: 'Standard cylinder tariff (Subsidy credited to bank)',
-    processingTimeHi: 'बुकिंग तुरंत | डिलीवरी 24-48 घंटे',
-    processingTimeEn: 'Booking instant | Delivery in 24-48 hrs',
-    requiredDocsHi: ['रजिस्टर्ड मोबाइल नंबर या उपभोक्ता संख्या (Consumer ID)', '17 अंकों की LPG ID', 'गैस पासबुक'],
-    requiredDocsEn: ['Registered Mobile Number or Consumer ID', '17-digit LPG ID', 'Gas Agency Passbook'],
-    stepsHi: [
-      'MyLPG.in या संबंधित कंपनी के पोर्टल / WhatsApp नंबर पर जाएं।',
-      'उपभोक्ता नंबर या मोबाइल से लॉगिन करें।',
-      'सिलेंडर रिफिल बुकिंग का अनुरोध दर्ज करें।',
-      'सब्सिडी स्थिति में आधार लिंकिंग व बैंक क्रेडिट जांचें।'
-    ],
-    stepsEn: [
-      'Visit MyLPG.in or company WhatsApp/Web booking service.',
-      'Login with consumer ID or registered mobile.',
-      'Submit cylinder refill request.',
-      'Check DBTL cash subsidy status and bank account linkage.'
-    ],
-    iconName: 'Flame',
-    searchKeywords: ['lpg', 'gas booking', 'cylinder', 'indane', 'hp gas', 'bharat gas', 'gas cylinder', 'गैस बुकिंग', 'सिलेंडर', 'एलपीजी', 'रसोई गैस']
-  },
+
   {
     id: 'fastag-recharge',
     titleHi: 'फास्टैग रिचार्ज व बैलेंस स्थिति (FASTag Portal)',
@@ -422,37 +361,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     iconName: 'Car',
     searchKeywords: ['fastag', 'fast tag', 'toll', 'recharge', 'nhai', 'toll plaza', 'फास्टैग', 'टोल रिचार्ज', 'फास्टैग रिचार्ज']
   },
-  {
-    id: 'resume-biodata-maker',
-    titleHi: 'बायोडाटा व रिज्यूमे मेकर (Job Resume Maker)',
-    titleEn: 'Online Bio-Data & Job Resume Maker',
-    category: 'jobs',
-    shortDescHi: 'प्राइवेट व संविदा नौकरियों हेतु 2 मिनट में स्वच्छ एवं आकर्षक हिंदी/अंग्रेजी सीवी व बायोडाटा तैयार करें।',
-    shortDescEn: 'Create clean, professional job resumes and bio-data in minutes for private, contractual and govt jobs.',
-    departmentHi: 'डिजिटल सेवा यूटिलिटी केंद्र (Digital Seva Tools)',
-    departmentEn: 'Digital Citizen Utilities',
-    officialUrl: '#resumetool',
-    feeHi: '',
-    feeEn: '',
-    processingTimeHi: 'तुरंत डाउनलोड (PDF)',
-    processingTimeEn: 'Instant Download',
-    requiredDocsHi: ['व्यक्तिगत विवरण (नाम, पता, मोबाइल, ईमेल)', 'शिक्षा व अनुभव की जानकारी'],
-    requiredDocsEn: ['Personal Details (Name, Address, Phone, Email)', 'Educational qualifications and work experience'],
-    stepsHi: [
-      'अपना नाम, मोबाइल, पता व शैक्षणिक योग्यता भरें।',
-      'अनुभव या कार्य कौशल (Skills) जोड़ें।',
-      'प्रारूप (Format) का चयन करें।',
-      'एक क्लिक में सुंदर पीडीएफ बायोडाटा डाउनलोड करें।'
-    ],
-    stepsEn: [
-      'Enter personal details, address and contact.',
-      'Add educational degrees and key skills.',
-      'Select clean template format.',
-      'Click to generate and download printable PDF resume.'
-    ],
-    iconName: 'FileText',
-    searchKeywords: ['resume', 'biodata', 'bio data', 'cv', 'curriculum vitae', 'job resume', 'बायोडाटा', 'रिज्यूमे', 'सीवी', 'नौकरी बायोडाटा', 'रिज्यूम', 'नौकरी फॉर्म']
-  },
+
   {
     id: 'other-services',
     titleHi: 'अन्य सेवाएं व ऑनलाइन सहायता (Other Services)',
@@ -484,58 +393,28 @@ export const SERVICES_DATA: ServiceItem[] = [
     badgeEn: 'Support',
     searchKeywords: ['other', 'other services', 'aanya', 'anya', 'anya seva', 'custom service', 'online form', 'help', 'अन्य', 'अन्य सेवा', 'अन्य सेवाएं', 'सहायता', 'ऑनलाइन कार्य']
   },
-  {
-    id: 'tds-tax-services',
-    titleHi: 'TDS / आयकर रिटर्न व फॉर्म 16 (Tax Services)',
-    titleEn: 'TDS / Income Tax Return & Form 16',
-    category: 'pf-tax',
-    shortDescHi: 'टैक्स डिडक्शन (TDS) विवरण, फॉर्म 16 डाउनलोड, आईटीआर (ITR) फाइलिंग व टैक्स रिफंड स्टेटस चेक।',
-    shortDescEn: 'TDS certificate download, Form 16, Income Tax Return (ITR) filing and tax refund status.',
-    departmentHi: 'आयकर विभाग भारत सरकार (Income Tax Department)',
-    departmentEn: 'Income Tax Department, Government of India',
-    officialUrl: 'https://www.incometax.gov.in/',
-    feeHi: 'सेवा शुल्क ₹100 - ₹300',
-    feeEn: 'Service Fee ₹100 - ₹300',
-    processingTimeHi: '2 से 4 कार्य दिवस',
-    processingTimeEn: '2 to 4 Working Days',
-    requiredDocsHi: ['पैन कार्ड (PAN Card)', 'फॉर्म 16 / सैलरी स्लिप', 'बैंक स्टेटमेंट व TDS विवरण (Form 26AS)'],
-    requiredDocsEn: ['PAN Card', 'Form 16 / Salary slips', 'Bank Statement & Form 26AS TDS details'],
-    stepsHi: [
-      'आयकर ई-फाइलिंग पोर्टल पर लॉगिन करें।',
-      'Form 26AS व Annual Information Statement (AIS) जांचें।',
-      'आईटीआर (ITR-1 / ITR-4) भरकर सबमिट करें।'
-    ],
-    stepsEn: [
-      'Login to Income Tax e-filing portal.',
-      'Verify Form 26AS and AIS statement.',
-      'Fill and submit ITR return.'
-    ],
-    iconName: 'Banknote',
-    badgeHi: 'टैक्स सेवा',
-    badgeEn: 'Tax Services',
-    searchKeywords: ['tds', 'tax', 'income tax', 'itr', 'form 16', 'form 26as', 'pan tax', 'टीडीएस', 'टैक्स', 'आयकर', 'आईटीआर', 'फॉर्म 16']
-  }
+
 ];
 
 export const SAMPLE_STATUS_DATA: Record<string, ApplicationStatusResult> = {
   'APP-2026-8842': {
     applicationId: 'APP-2026-8842',
-    serviceNameHi: 'जाति प्रमाण पत्र (ओबीसी)',
-    serviceNameEn: 'Caste Certificate (OBC Category)',
+    serviceNameHi: 'छात्रवृत्ति आवेदन (Pre & Post Matric)',
+    serviceNameEn: 'Scholarship Application (State & NSP)',
     applicantName: 'राजेश कुमार (Rajesh Kumar)',
     appliedDate: '02 मार्च 2026',
     currentStep: 3,
     totalSteps: 4,
     status: 'In Progress',
-    statusTextHi: 'तहसीलदार स्तर पर स्वीकृति प्रतीक्षारत',
-    statusTextEn: 'Awaiting Final Tehsildar Approval',
-    remarksHi: 'लेखपाल द्वारा स्थलीय जांच पूर्ण कर सकारात्मक रिपोर्ट प्रेषित की जा चुकी है। 24 घंटे में डिजिटल हस्ताक्षर पूर्ण होंगे।',
-    remarksEn: 'Field verification completed by Revenue Inspector. Digital signature by sub-divisional magistrate expected within 24 hours.',
+    statusTextHi: 'संस्थान एवं जिला समाज कल्याण स्तर पर सत्यापन',
+    statusTextEn: 'Verification at Institute & District Level',
+    remarksHi: 'संस्थान द्वारा आवेदन अग्रसारित किया जा चुका है। जिला स्तर पर सत्यापन प्रक्रियाधीन है।',
+    remarksEn: 'Application forwarded by institution. District level verification in progress.',
     stages: [
-      { titleHi: 'ऑनलाइन आवेदन व शुल्क जमा', titleEn: 'Application Submitted & Fee Paid', date: '02 मार्च 2026', completed: true },
-      { titleHi: 'दस्तावेज प्रारंभिक जांच स्वीकृत', titleEn: 'Document Verification Cleared', date: '04 मार्च 2026', completed: true },
-      { titleHi: 'लेखपाल / कानूनगो स्थलीय सत्यापन पूर्ण', titleEn: 'Revenue Inspector Report Submitted', date: '08 मार्च 2026', completed: true },
-      { titleHi: 'डिजिटल हस्ताक्षर व प्रमाण पत्र निर्गमन', titleEn: 'Digital Signature & Certificate Issued', date: '11 मार्च 2026 (अपेक्षित)', completed: false }
+      { titleHi: 'ऑनलाइन आवेदन व रजिस्ट्रेशन', titleEn: 'Online Registration & Form Submission', date: '02 मार्च 2026', completed: true },
+      { titleHi: 'संस्थान द्वारा ऑनलाइन फॉरवर्ड', titleEn: 'Forwarded by Institution', date: '05 मार्च 2026', completed: true },
+      { titleHi: 'जिला समाज कल्याण अधिकारी सत्यापन', titleEn: 'District Social Welfare Verification', date: '09 मार्च 2026', completed: true },
+      { titleHi: 'छात्रवृत्ति राशि बैंक खाते में अंतरण', titleEn: 'Scholarship Disbursal to Bank Account', date: '15 मार्च 2026 (अपेक्षित)', completed: false }
     ]
   },
   'PAN-2026-3190': {

@@ -66,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onSelectNav('bills')} 
               className={`hover:text-slate-900 transition-colors whitespace-nowrap shrink-0 ${activeSection === 'bills' ? 'text-amber-700 font-semibold' : ''}`}
             >
-              {isHi ? 'बिजली व बिल भुगतान' : 'Utility & Bills'}
+              {isHi ? 'फास्टैग व बिल भुगतान' : 'FASTag & Bills'}
             </button>
             <button 
               onClick={() => onSelectNav('status')} 

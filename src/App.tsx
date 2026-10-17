@@ -17,6 +17,7 @@ import { GoogleSearchConsoleGuideModal } from './components/GoogleSearchConsoleG
 import { AdminTokensPortal } from './components/AdminTokensPortal';
 import { Footer } from './components/Footer';
 import { WebsiteShareModal } from './components/WebsiteShareModal';
+import { FAQSection } from './components/FAQSection';
 import { 
   Zap, 
   FileText, 
@@ -130,8 +131,6 @@ export default function App() {
       bhulekh: ['khasra', 'khatauni', 'भूलेख'],
       rashan: ['ration', 'nfsa', 'राशन'],
       ration: ['rashan', 'राशन'],
-      jati: ['caste', 'जाति'],
-      niwas: ['domicile', 'residence', 'निवास'],
       kisan: ['pm kisan', 'किसान'],
       shram: ['eshram', 'मजदूर', 'श्रम'],
       cv: ['resume', 'biodata', 'सीवी'],
@@ -470,6 +469,11 @@ export default function App() {
         {/* Section 4: Emergency Helplines Directory */}
         <section id="helpline" className="scroll-mt-20">
           <HelplineDirectory language={language} />
+        </section>
+
+        {/* Section 5: FAQ Section */}
+        <section id="faq" className="scroll-mt-20">
+          <FAQSection language={language} />
         </section>
 
       </main>

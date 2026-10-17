@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Language, ServiceCategory, ServiceItem } from '../types/service';
 import { Search, ShieldCheck, Clock, FileCheck, Layers, X, Sparkles, ChevronRight, Zap, ArrowRight, ExternalLink } from 'lucide-react';
+import { GreetingComponent } from './GreetingComponent';
 
 interface HeroProps {
   language: Language;
@@ -77,6 +78,10 @@ export const Hero: React.FC<HeroProps> = ({
 
         {/* National civic banner headline */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="mb-2 flex justify-center">
+            <GreetingComponent language={language} />
+          </div>
+
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-amber-800 bg-amber-100/70 px-3 py-1 rounded-full">
             <Sparkles className="w-3.5 h-3.5 text-amber-600" />
             <span>{isHi ? 'डिजिटल एवं जन सेवा केंद्र पोर्टल' : 'Digital & Jan Seva Kendra Portal'}</span>
@@ -90,8 +95,8 @@ export const Hero: React.FC<HeroProps> = ({
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
             {isHi
-              ? 'सरकारी नौकरी, आधार कार्ड, नया पैन कार्ड, जाति व निवास प्रमाण पत्र, पीएम किसान, राशन कार्ड, बिजली बिल भुगतान एवं फॉर्म भरने के सभी आधिकारिक साधन एक ही मंच पर।'
-              : 'Direct access to Sarkari Naukri, Aadhaar, PAN card, caste and domicile certificates, PM Kisan, land records, electricity bill pay, and government application services.'}
+              ? 'सरकारी नौकरी, आधार कार्ड, नया पैन कार्ड, छात्रवृत्ति, पीएम किसान एवं फॉर्म भरने के सभी आधिकारिक साधन एक ही मंच पर।'
+              : 'Direct access to Sarkari Naukri, Aadhaar, PAN card, scholarships, PM Kisan, and government application services.'}
           </p>
         </div>
 
@@ -147,9 +152,7 @@ export const Hero: React.FC<HeroProps> = ({
               { labelHi: 'आधार कार्ड', labelEn: 'Aadhaar', term: 'aadhaar' },
               { labelHi: 'पैन कार्ड', labelEn: 'PAN Card', term: 'pan' },
               { labelHi: 'छात्रवृत्ति', labelEn: 'Scholarship', term: 'scholarship' },
-              { labelHi: 'भूलेख / खतौनी', labelEn: 'Bhulekh', term: 'bhulekh' },
-              { labelHi: 'PF (EPFO)', labelEn: 'PF Balance', term: 'pf' },
-              { labelHi: 'जाति प्रमाण पत्र', labelEn: 'Caste Cert', term: 'caste' }
+              { labelHi: 'PF (EPFO)', labelEn: 'PF Balance', term: 'pf' }
             ].map((chip) => (
               <button
                 key={chip.term}
