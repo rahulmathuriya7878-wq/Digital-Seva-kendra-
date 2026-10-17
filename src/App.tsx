@@ -18,6 +18,7 @@ import { AdminTokensPortal } from './components/AdminTokensPortal';
 import { Footer } from './components/Footer';
 import { WebsiteShareModal } from './components/WebsiteShareModal';
 import { FAQSection } from './components/FAQSection';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { 
   Zap, 
   FileText, 
@@ -578,6 +579,8 @@ export default function App() {
           onClose={() => setIsShareModalOpen(false)}
         />
       )}
+
+      <SpeedInsights />
 
     </div>
   );
