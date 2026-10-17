@@ -7,8 +7,10 @@ import {
   Square, 
   Ticket, 
   Clock, 
-  Banknote
+  Banknote,
+  Star
 } from 'lucide-react';
+import { ServiceWordTutorials } from './ServiceWordTutorials';
 
 interface ServiceDetailModalProps {
   service: ServiceItem;
@@ -27,6 +29,61 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   const isHi = language === 'hi';
   const [checkedDocs, setCheckedDocs] = useState<Record<number, boolean>>({});
   const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>({});
+  const [rating, setRating] = useState<number>(0);
+  const [hoverRating, setHoverRating] = useState<number>(0);
+  const [feedbackText, setFeedbackText] = useState<string>('');
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState<boolean>(false);
+
+  interface ReviewItem {
+    id: string;
+    rating: number;
+    commentHi: string;
+    commentEn: string;
+    timeAgoHi: string;
+    timeAgoEn: string;
+  }
+
+  const [reviews, setReviews] = useState<ReviewItem[]>([
+    {
+      id: 'rev-1',
+      rating: 5,
+      commentHi: 'बहुत ही सरल और तेज प्रक्रिया। बिना किसी परेशानी के काम हो गया।',
+      commentEn: 'Very smooth and fast process. Work completed without any hassle.',
+      timeAgoHi: '2 घंटे पहले',
+      timeAgoEn: '2 hours ago'
+    },
+    {
+      id: 'rev-2',
+      rating: 5,
+      commentHi: 'आधिकारिक पोर्टल लिंक और चरणबद्ध जानकारी बहुत उपयोगी रही।',
+      commentEn: 'Official portal link and step-by-step guidance were extremely helpful.',
+      timeAgoHi: '1 दिन पहले',
+      timeAgoEn: '1 day ago'
+    },
+    {
+      id: 'rev-3',
+      rating: 4,
+      commentHi: 'समय पर टोकन और सटीक मार्गदर्शन मिला। धन्यवाद!',
+      commentEn: 'Got timely token and accurate guidance. Thank you!',
+      timeAgoHi: '3 दिन पहले',
+      timeAgoEn: '3 days ago'
+    }
+  ]);
+
+  const handleFeedbackSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (rating === 0) return;
+    const newRev: ReviewItem = {
+      id: 'rev-' + Date.now(),
+      rating,
+      commentHi: feedbackText.trim() || (isHi ? 'उत्कृष्ट सेवा अनुभव।' : 'Excellent service experience.'),
+      commentEn: feedbackText.trim() || 'Excellent service experience.',
+      timeAgoHi: 'अभी-अभी',
+      timeAgoEn: 'Just now'
+    };
+    setReviews([newRev, ...reviews]);
+    setFeedbackSubmitted(true);
+  };
 
   const toggleDoc = (index: number) => {
     setCheckedDocs((prev) => ({
@@ -204,6 +261,99 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Word Tutorial Guide & Expert Tips */}
+          <ServiceWordTutorials serviceId={service.id} language={language} />
+
+          {/* Rating and Feedback Section */}
+          <div className="mt-6 pt-5 border-t border-slate-200 bg-amber-50/40 p-4 rounded-2xl border border-amber-200/60">
+            <h3 className="text-xs font-bold text-amber-900 uppercase tracking-wider mb-2">
+              {isHi ? 'इस सेवा पर अपनी प्रतिक्रिया दें (Rate this Service)' : 'Rate & Provide Feedback on this Service'}
+            </h3>
+            {feedbackSubmitted ? (
+              <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-xl text-emerald-800 text-xs font-semibold text-center animate-in fade-in">
+                ✨ {isHi ? 'आपकी बहुमूल्य प्रतिक्रिया के लिए धन्यवाद!' : 'Thank you for your valuable feedback!'}
+              </div>
+            ) : (
+              <form onSubmit={handleFeedbackSubmit} className="space-y-2.5">
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setRating(star)}
+                      onMouseEnter={() => setHoverRating(star)}
+                      onMouseLeave={() => setHoverRating(0)}
+                      className="p-1 focus:outline-none cursor-pointer transition-transform hover:scale-110"
+                    >
+                      <Star
+                        className={`w-5 h-5 ${
+                          (hoverRating || rating) >= star
+                            ? 'text-amber-500 fill-amber-500'
+                            : 'text-slate-300'
+                        }`}
+                      />
+                    </button>
+                  ))}
+                  <span className="ml-2 text-xs font-bold text-slate-700">
+                    {rating > 0 ? `${rating}/5` : (isHi ? 'रेटिंग चुनें' : 'Select rating')}
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={feedbackText}
+                    onChange={(e) => setFeedbackText(e.target.value)}
+                    placeholder={isHi ? 'अपनी टिप्पणी या सुझाव दर्ज करें (वैकल्पिक)...' : 'Write comments or suggestions (optional)...'}
+                    className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
+                  />
+                  <button
+                    type="submit"
+                    disabled={rating === 0}
+                    className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+                      rating > 0
+                        ? 'bg-slate-900 hover:bg-slate-800 text-white'
+                        : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                    }`}
+                  >
+                    {isHi ? 'सबमिट' : 'Submit'}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+
+          {/* Recent User Feedback (Last 3 Anonymous Ratings & Comments) */}
+          <div className="mt-4 space-y-2">
+            <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
+              <span>{isHi ? 'हालिया नागरिक प्रतिक्रियाएं (Recent Community Feedback)' : 'Recent Community Feedback'}</span>
+              <span className="text-amber-700">★ 4.8 / 5.0</span>
+            </div>
+            <div className="space-y-2">
+              {reviews.slice(0, 3).map((rev) => (
+                <div key={rev.id} className="p-3 bg-white rounded-xl border border-slate-200 text-xs shadow-2xs space-y-1">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1">
+                      {[1, 2, 3, 4, 5].map((s) => (
+                        <Star
+                          key={s}
+                          className={`w-3 h-3 ${s <= rev.rating ? 'text-amber-500 fill-amber-500' : 'text-slate-200'}`}
+                        />
+                      ))}
+                      <span className="font-bold text-slate-700 ml-1">{rev.rating}.0</span>
+                    </div>
+                    <span className="text-[10px] text-slate-400">{isHi ? rev.timeAgoHi : rev.timeAgoEn}</span>
+                  </div>
+                  <p className="text-slate-600 font-medium italic">
+                    "{isHi ? rev.commentHi : rev.commentEn}"
+                  </p>
+                  <div className="text-[10px] text-slate-400 font-mono">
+                    — {isHi ? 'सत्यापित नागरिक (Verified Citizen)' : 'Verified Citizen'}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

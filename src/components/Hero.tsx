@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Language, ServiceCategory, ServiceItem } from '../types/service';
-import { Search, ShieldCheck, Clock, FileCheck, Layers, X, Sparkles, ChevronRight, Zap, ArrowRight, ExternalLink } from 'lucide-react';
+import { Search, ShieldCheck, Clock, FileCheck, Layers, X, Sparkles, ChevronRight, Zap, ArrowRight, ExternalLink, Briefcase, Banknote } from 'lucide-react';
 import { GreetingComponent } from './GreetingComponent';
 
 interface HeroProps {
@@ -39,14 +39,14 @@ export const Hero: React.FC<HeroProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const categories: { id: ServiceCategory; labelHi: string; labelEn: string }[] = [
-    { id: 'all', labelHi: 'सभी सेवाएं', labelEn: 'All Services' },
-    { id: 'jobs', labelHi: 'सरकारी नौकरी व रिजल्ट', labelEn: 'Sarkari Jobs & Results' },
-    { id: 'identity', labelHi: 'आधार व पहचान कार्ड', labelEn: 'Aadhaar & Identity' },
-    { id: 'certificates', labelHi: 'जाति, निवास व खतौनी', labelEn: 'Certificates & Land' },
-    { id: 'pf-tax', labelHi: 'PF व TDS / टैक्स सेवाएं', labelEn: 'PF & TDS / Tax Services' },
-    { id: 'welfare', labelHi: 'पीएम किसान व सरकारी योजनाएं', labelEn: 'Welfare Schemes' },
-    { id: 'bills', labelHi: 'बिजली बिल व यूटिलिटी', labelEn: 'Utility & Bills' }
+  const categories: { id: ServiceCategory; labelHi: string; labelEn: string; icon: React.ReactNode }[] = [
+    { id: 'all', labelHi: 'सभी सेवाएं', labelEn: 'All Services', icon: <Layers className="w-4 h-4 text-slate-500" /> },
+    { id: 'jobs', labelHi: 'सरकारी नौकरी व रिजल्ट', labelEn: 'Sarkari Jobs & Results', icon: <Briefcase className="w-4 h-4 text-blue-600" /> },
+    { id: 'identity', labelHi: 'आधार व पहचान कार्ड', labelEn: 'Aadhaar & Identity', icon: <ShieldCheck className="w-4 h-4 text-emerald-600" /> },
+    { id: 'certificates', labelHi: 'खतौनी व प्रमाण पत्र', labelEn: 'Land & Certificates', icon: <FileCheck className="w-4 h-4 text-amber-600" /> },
+    { id: 'pf-tax', labelHi: 'PF व TDS / टैक्स सेवाएं', labelEn: 'PF & TDS / Tax Services', icon: <Banknote className="w-4 h-4 text-purple-600" /> },
+    { id: 'welfare', labelHi: 'पीएम किसान व सरकारी योजनाएं', labelEn: 'Welfare Schemes', icon: <Sparkles className="w-4 h-4 text-rose-600" /> },
+    { id: 'bills', labelHi: 'फास्टैग व बिल भुगतान', labelEn: 'FASTag & Bills', icon: <Zap className="w-4 h-4 text-amber-500" /> }
   ];
 
   const handleSelectDropdownItem = (service: ServiceItem) => {
@@ -286,13 +286,14 @@ export const Hero: React.FC<HeroProps> = ({
                 <button
                   key={cat.id}
                   onClick={() => onSelectCategory(cat.id)}
-                  className={`px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 ${
+                  className={`flex items-center gap-2 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                     isActive
-                      ? 'bg-white text-slate-900 shadow-xs'
+                      ? 'bg-white text-slate-900 shadow-xs ring-1 ring-slate-300'
                       : 'text-slate-700 hover:text-slate-900 hover:bg-white/40'
                   }`}
                 >
-                  {isHi ? cat.labelHi : cat.labelEn}
+                  {cat.icon}
+                  <span>{isHi ? cat.labelHi : cat.labelEn}</span>
                 </button>
               );
             })}
