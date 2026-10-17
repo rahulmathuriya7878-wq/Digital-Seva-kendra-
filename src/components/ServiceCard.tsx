@@ -22,7 +22,8 @@ import {
   ExternalLink,
   ChevronRight,
   HelpCircle,
-  Heart
+  Heart,
+  Share2
 } from 'lucide-react';
 
 interface ServiceCardProps {
@@ -78,6 +79,37 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       case 'bills': return isHi ? 'यूटिलिटी बिल' : 'Utility Bills';
       case 'jobs': return isHi ? 'नौकरी व रिजल्ट' : 'Jobs & Exam';
       default: return isHi ? 'ऑनलाइन सेवा' : 'Online Service';
+    }
+  };
+
+  const handleShareService = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    const title = isHi ? service.titleHi : service.titleEn;
+    const dept = isHi ? service.departmentHi : service.departmentEn;
+    const fee = isHi ? service.feeHi : service.feeEn;
+    const timeline = isHi ? service.processingTimeHi : service.processingTimeEn;
+    const desc = isHi ? service.shortDescHi : service.shortDescEn;
+    const url = service.officialUrl.startsWith('http') ? service.officialUrl : window.location.href;
+
+    const shareText = isHi
+      ? `🏛 *${title}* (${dept})\n\n📝 *विवरण:* ${desc}\n💰 *ऑनलाइन फॉर्म भरने की फीस:* ${fee || 'निःशुल्क'}\n⏱ *समय सीमा:* ${timeline}\n\n🌐 *आधिकारिक पोर्टल लिंक:* ${url}\n\n✨ _डिजिटल एवं जन सेवा केंद्र पोर्टल से साझा किया गया_`
+      : `🏛 *${title}* (${dept})\n\n📝 *Details:* ${desc}\n💰 *Online Form Filling Fee:* ${fee || 'Free'}\n⏱ *Timeline:* ${timeline}\n\n🌐 *Official Portal Link:* ${url}\n\n✨ _Shared via Digital & Jan Seva Kendra Portal_`;
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: title,
+          text: shareText,
+          url: url,
+        })
+        .catch((err) => {
+          if (err && err.name !== 'AbortError') {
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+          }
+        });
+    } else {
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
     }
   };
 
@@ -163,6 +195,17 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         >
           <span>{isHi ? 'प्रक्रिया व आवेदन गाइड' : 'Steps & Guidelines'}</span>
           <ChevronRight className="w-4 h-4 text-amber-400" />
+        </button>
+
+        {/* Native Web Share API Button (Direct, No Popup) */}
+        <button
+          type="button"
+          onClick={handleShareService}
+          title={isHi ? 'यह सेवा सीधे शेयर करें' : 'Share this service directly'}
+          aria-label={isHi ? 'यह सेवा सीधे शेयर करें' : 'Share this service directly'}
+          className="p-3 text-slate-700 hover:text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 rounded-xl border border-slate-200 transition-colors shrink-0 flex items-center justify-center min-w-[44px] min-h-[44px] cursor-pointer"
+        >
+          <Share2 className="w-4 h-4 text-emerald-600" />
         </button>
 
         {service.officialUrl.startsWith('http') && (

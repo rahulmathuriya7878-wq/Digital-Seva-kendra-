@@ -1,6 +1,7 @@
 import React from 'react';
 import { Language } from '../types/service';
-import { Landmark, Globe, Ticket, Mail, FileText, ShieldCheck } from 'lucide-react';
+import { Landmark, Globe, Ticket, Mail, FileText, ShieldCheck, Share2 } from 'lucide-react';
+import { shareFullWebsiteDetails } from '../utils/shareUtils';
 
 interface HeaderProps {
   language: Language;
@@ -112,6 +113,16 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
               <span className="hidden md:inline">{isHi ? 'एडमिन पैनल' : 'Admin Panel'}</span>
+            </button>
+
+            {/* Direct 1-Click Share Button (No Popup) */}
+            <button
+              onClick={() => shareFullWebsiteDetails(language)}
+              title={isHi ? 'वेबसाइट पूरी जानकारी सहित शेयर करें' : 'Share website with full details'}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold rounded-md border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 transition-colors whitespace-nowrap cursor-pointer"
+            >
+              <Share2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="hidden sm:inline">{isHi ? 'शेयर करें' : 'Share'}</span>
             </button>
 
             {/* Language Toggle Button */}

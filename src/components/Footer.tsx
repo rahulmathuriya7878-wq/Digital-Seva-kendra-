@@ -1,15 +1,15 @@
 import React from 'react';
 import { Language } from '../types/service';
 import { Landmark, ExternalLink, ShieldCheck, Share2 } from 'lucide-react';
+import { shareFullWebsiteDetails } from '../utils/shareUtils';
 
 interface FooterProps {
   language: Language;
   onSelectNav: (sectionId: string) => void;
   onOpenSearchConsoleModal?: () => void;
-  onOpenShareModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSearchConsoleModal, onOpenShareModal }) => {
+export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSearchConsoleModal }) => {
   const isHi = language === 'hi';
 
   const officialLinks = [
@@ -20,26 +20,6 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
     { name: 'Parivahan Sarathi', url: 'https://parivahan.gov.in/' },
     { name: 'PM Kisan Samman Nidhi', url: 'https://pmkisan.gov.in/' }
   ];
-
-  const handleShareWebsite = () => {
-    const textHi = `🏛 *डिजिटल एवं जन सेवा केंद्र पोर्टल* 🏛\n\nभारत के नागरिकों हेतु सभी ऑनलाइन इंटरनेट सेवाएं, प्रमाण पत्र, सरकारी योजनाएं व फॉर्म भरने का एक ही मंच।\n\n🔹 *प्रमुख सेवाएं:* \n- सरकारी नौकरी फॉर्म व रिजल्ट्स\n- PF (EPFO) व पेंशन सेवाएं\n- छात्रवृत्ति आवेदन (Scholarship)\n- आधार कार्ड डाउनलोड व पीवीसी\n- नया पैन कार्ड आवेदन\n- भूलेख / अपना खाता / जमाबंदी (UP & Rajasthan)\n- श्रम कार्ड, वोटर आईडी व राशन कार्ड\n\n🌐 *पोर्टल लिंक:* https://digital-seva-kendra-seven.vercel.app/\n\nअपने सभी नागरिक कार्यों और ऑनलाइन फॉर्म्स के लिए आज ही विजिट करें!`;
-
-    const textEn = `🏛 *Digital & Jan Seva Kendra Portal* 🏛\n\nSingle window digital portal for all Indian citizen online services, certificates, and government applications.\n\n🔹 *Key Services:* \n- Sarkari Jobs & Results\n- PF (EPFO) & Pension Services\n- Scholarship Applications\n- Aadhaar Services & PVC\n- New PAN Card Application\n- Bhulekh / Apna Khata / Jamabandi\n- Labour Card, Voter ID & Ration Card\n\n🌐 *Portal Link:* https://digital-seva-kendra-seven.vercel.app/\n\nVisit today for all your digital and online citizen needs!`;
-
-    const shareText = isHi ? textHi : textEn;
-
-    if (navigator.share) {
-      navigator.share({
-        title: isHi ? 'डिजिटल एवं जन सेवा केंद्र पोर्टल' : 'Digital & Jan Seva Kendra Portal',
-        text: shareText,
-        url: 'https://digital-seva-kendra-seven.vercel.app/'
-      }).catch(() => {
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
-      });
-    } else {
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
-    }
-  };
 
   return (
     <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 pt-12 pb-10">
@@ -63,8 +43,9 @@ export const Footer: React.FC<FooterProps> = ({ language, onSelectNav, onOpenSea
             </p>
              <div className="pt-2 flex flex-col gap-2">
               <button
-                onClick={onOpenShareModal || handleShareWebsite}
+                onClick={() => shareFullWebsiteDetails(language)}
                 className="group inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 hover:text-blue-200 font-bold text-xs transition-colors cursor-pointer"
+                title={isHi ? 'वेबसाइट पूरी जानकारी सहित शेयर करें' : 'Share website with full details'}
               >
                 <Share2 className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform duration-300" />
                 <span>{isHi ? '💬 वेबसाइट पूरी जानकारी सहित शेयर करें' : '💬 Share Website with Details'}</span>

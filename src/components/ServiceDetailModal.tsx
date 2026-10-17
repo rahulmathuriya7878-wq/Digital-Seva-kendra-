@@ -8,7 +8,8 @@ import {
   Ticket, 
   Clock, 
   Banknote,
-  Star
+  Star,
+  Share2
 } from 'lucide-react';
 import { ServiceWordTutorials } from './ServiceWordTutorials';
 
@@ -108,6 +109,35 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   const docsProgress = Math.round((completedDocsCount / (docs.length || 1)) * 100);
   const stepsProgress = Math.round((completedStepsCount / (steps.length || 1)) * 100);
 
+  const handleShareService = () => {
+    const title = isHi ? service.titleHi : service.titleEn;
+    const dept = isHi ? service.departmentHi : service.departmentEn;
+    const fee = isHi ? service.feeHi : service.feeEn;
+    const timeline = isHi ? service.processingTimeHi : service.processingTimeEn;
+    const desc = isHi ? service.shortDescHi : service.shortDescEn;
+    const url = service.officialUrl.startsWith('http') ? service.officialUrl : window.location.href;
+
+    const shareText = isHi
+      ? `🏛 *${title}* (${dept})\n\n📝 *विवरण:* ${desc}\n💰 *ऑनलाइन फॉर्म भरने की फीस:* ${fee || 'निःशुल्क'}\n⏱ *समय सीमा:* ${timeline}\n\n🌐 *आधिकारिक पोर्टल लिंक:* ${url}\n\n✨ _डिजिटल एवं जन सेवा केंद्र पोर्टल से साझा किया गया_`
+      : `🏛 *${title}* (${dept})\n\n📝 *Details:* ${desc}\n💰 *Online Form Filling Fee:* ${fee || 'Free'}\n⏱ *Timeline:* ${timeline}\n\n🌐 *Official Portal Link:* ${url}\n\n✨ _Shared via Digital & Jan Seva Kendra Portal_`;
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: title,
+          text: shareText,
+          url: url,
+        })
+        .catch((err) => {
+          if (err && err.name !== 'AbortError') {
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+          }
+        });
+    } else {
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
       <div className="relative w-full max-w-2xl bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden my-6">
@@ -122,13 +152,23 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               {isHi ? service.titleHi : service.titleEn}
             </h2>
           </div>
-          <button
-            onClick={onClose}
-            className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
-            aria-label="Close"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleShareService}
+              title={isHi ? 'यह सेवा सीधे शेयर करें' : 'Share this service'}
+              className="text-emerald-400 hover:text-white px-2.5 py-1.5 rounded-lg bg-emerald-950/50 hover:bg-emerald-900/60 border border-emerald-500/30 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+            >
+              <Share2 className="w-3.5 h-3.5" />
+              <span>{isHi ? 'शेयर' : 'Share'}</span>
+            </button>
+            <button
+              onClick={onClose}
+              className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Content Body */}
