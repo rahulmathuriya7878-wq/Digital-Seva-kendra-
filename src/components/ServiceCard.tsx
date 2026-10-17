@@ -19,7 +19,6 @@ import {
   Flame, 
   Car, 
   FileCheck2,
-  ExternalLink,
   ChevronRight,
   HelpCircle,
   Heart,
@@ -90,18 +89,19 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     const fee = isHi ? service.feeHi : service.feeEn;
     const timeline = isHi ? service.processingTimeHi : service.processingTimeEn;
     const desc = isHi ? service.shortDescHi : service.shortDescEn;
-    const url = service.officialUrl.startsWith('http') ? service.officialUrl : window.location.href;
+    const portalUrl = window.location.origin ? `${window.location.origin}/#${service.id}` : window.location.href;
+    const officialUrl = service.officialUrl && service.officialUrl.startsWith('http') ? service.officialUrl : '';
 
     const shareText = isHi
-      ? `🏛 *${title}* (${dept})\n\n📝 *विवरण:* ${desc}\n💰 *ऑनलाइन फॉर्म भरने की फीस:* ${fee || 'निःशुल्क'}\n⏱ *समय सीमा:* ${timeline}\n\n🌐 *आधिकारिक पोर्टल लिंक:* ${url}\n\n✨ _डिजिटल एवं जन सेवा केंद्र पोर्टल से साझा किया गया_`
-      : `🏛 *${title}* (${dept})\n\n📝 *Details:* ${desc}\n💰 *Online Form Filling Fee:* ${fee || 'Free'}\n⏱ *Timeline:* ${timeline}\n\n🌐 *Official Portal Link:* ${url}\n\n✨ _Shared via Digital & Jan Seva Kendra Portal_`;
+      ? `🏛 *${title}* (${dept})\n\n📝 *विवरण:* ${desc}\n💰 *ऑनलाइन फॉर्म भरने की फीस:* ${fee || 'निःशुल्क'}\n⏱ *समय सीमा:* ${timeline}\n\n🌐 *पोर्टल लिंक:* ${portalUrl}${officialUrl ? `\n🔗 *आधिकारिक पोर्टल लिंक:* ${officialUrl}` : ''}`
+      : `🏛 *${title}* (${dept})\n\n📝 *Details:* ${desc}\n💰 *Online Form Filling Fee:* ${fee || 'Free'}\n⏱ *Timeline:* ${timeline}\n\n🌐 *Portal Link:* ${portalUrl}${officialUrl ? `\n🔗 *Official Portal Link:* ${officialUrl}` : ''}`;
 
     if (navigator.share) {
       navigator
         .share({
           title: title,
           text: shareText,
-          url: url,
+          url: portalUrl,
         })
         .catch((err) => {
           if (err && err.name !== 'AbortError') {
@@ -207,18 +207,6 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         >
           <Share2 className="w-4 h-4 text-emerald-600" />
         </button>
-
-        {service.officialUrl.startsWith('http') && (
-          <a
-            href={service.officialUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={isHi ? 'सीधा सरकारी पोर्टल खोलें' : 'Open Official Govt Portal'}
-            className="p-3 text-slate-700 hover:text-amber-800 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors shrink-0 flex items-center justify-center min-w-[44px] min-h-[44px] cursor-pointer"
-          >
-            <ExternalLink className="w-4 h-4" />
-          </a>
-        )}
       </div>
     </div>
   );

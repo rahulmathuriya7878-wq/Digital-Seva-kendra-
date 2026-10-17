@@ -115,18 +115,19 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
     const fee = isHi ? service.feeHi : service.feeEn;
     const timeline = isHi ? service.processingTimeHi : service.processingTimeEn;
     const desc = isHi ? service.shortDescHi : service.shortDescEn;
-    const url = service.officialUrl.startsWith('http') ? service.officialUrl : window.location.href;
+    const portalUrl = window.location.origin ? `${window.location.origin}/#${service.id}` : window.location.href;
+    const officialUrl = service.officialUrl && service.officialUrl.startsWith('http') ? service.officialUrl : '';
 
     const shareText = isHi
-      ? `🏛 *${title}* (${dept})\n\n📝 *विवरण:* ${desc}\n💰 *ऑनलाइन फॉर्म भरने की फीस:* ${fee || 'निःशुल्क'}\n⏱ *समय सीमा:* ${timeline}\n\n🌐 *आधिकारिक पोर्टल लिंक:* ${url}\n\n✨ _डिजिटल एवं जन सेवा केंद्र पोर्टल से साझा किया गया_`
-      : `🏛 *${title}* (${dept})\n\n📝 *Details:* ${desc}\n💰 *Online Form Filling Fee:* ${fee || 'Free'}\n⏱ *Timeline:* ${timeline}\n\n🌐 *Official Portal Link:* ${url}\n\n✨ _Shared via Digital & Jan Seva Kendra Portal_`;
+      ? `🏛 *${title}* (${dept})\n\n📝 *विवरण:* ${desc}\n💰 *ऑनलाइन फॉर्म भरने की फीस:* ${fee || 'निःशुल्क'}\n⏱ *समय सीमा:* ${timeline}\n\n🌐 *पोर्टल लिंक:* ${portalUrl}${officialUrl ? `\n🔗 *आधिकारिक पोर्टल लिंक:* ${officialUrl}` : ''}`
+      : `🏛 *${title}* (${dept})\n\n📝 *Details:* ${desc}\n💰 *Online Form Filling Fee:* ${fee || 'Free'}\n⏱ *Timeline:* ${timeline}\n\n🌐 *Portal Link:* ${portalUrl}${officialUrl ? `\n🔗 *Official Portal Link:* ${officialUrl}` : ''}`;
 
     if (navigator.share) {
       navigator
         .share({
           title: title,
           text: shareText,
-          url: url,
+          url: portalUrl,
         })
         .catch((err) => {
           if (err && err.name !== 'AbortError') {
